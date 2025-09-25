@@ -7,20 +7,81 @@ const EnergyDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedCharts, setSelectedCharts] = useState({});
 
-  // Sample data generator with more realistic ranges
-  const generateData = (baseValue, variance) => {
-    return Array.from({ length: 10 }, (_, i) => {
-      const year = 2015 + i;
-      const mean = baseValue + (Math.random() - 0.5) * variance * 0.3;
-      const minVariation = Math.random() * variance * 0.2;
-      const maxVariation = Math.random() * variance * 0.3;
-      const min = mean - minVariation;
-      const max = mean + maxVariation;
-      return { year, mean: Math.round(mean * 100) / 100, min: Math.round(min * 100) / 100, max: Math.round(max * 100) / 100 };
-    });
-  };
+  // Static data generator - now using useMemo to prevent regeneration
+  const staticData = useMemo(() => {
+    const generateData = (baseValue, variance) => {
+      return Array.from({ length: 10 }, (_, i) => {
+        const year = 2015 + i;
+        // Use year as seed for consistent random values
+        const seed1 = Math.sin(year * 12.9898 + i * 78.233) * 43758.5453;
+        const seed2 = Math.sin(year * 15.9898 + i * 73.233) * 43758.5453;
+        const seed3 = Math.sin(year * 18.9898 + i * 68.233) * 43758.5453;
+        
+        const random1 = (seed1 - Math.floor(seed1));
+        const random2 = (seed2 - Math.floor(seed2));
+        const random3 = (seed3 - Math.floor(seed3));
+        
+        const mean = baseValue + (random1 - 0.5) * variance * 0.3;
+        const minVariation = random2 * variance * 0.2;
+        const maxVariation = random3 * variance * 0.3;
+        const min = mean - minVariation;
+        const max = mean + maxVariation;
+        return { 
+          year, 
+          mean: Math.round(mean * 100) / 100, 
+          min: Math.round(min * 100) / 100, 
+          max: Math.round(max * 100) / 100 
+        };
+      });
+    };
 
-  // Function to generate transparent shaded colors
+    return {
+      'final-energy': [
+        { id: 'electricity', name: 'Electricity', data: generateData(1200, 200), color: '#684d7c' },
+        { id: 'transport', name: 'Transportation', data: generateData(900, 150), color: '#2d5a2d' },
+        { id: 'heating', name: 'Heating & Cooling', data: generateData(800, 120), color: '#b8860b' },
+        { id: 'industrial', name: 'Industrial Process', data: generateData(1100, 180), color: '#8b2635' },
+        { id: 'residential', name: 'Residential', data: generateData(600, 100), color: '#2f4f4f' }
+      ],
+      'primary-energy': [
+        { id: 'coal', name: 'Coal', data: generateData(2000, 300), color: '#2c2c2c' },
+        { id: 'oil', name: 'Oil', data: generateData(1800, 250), color: '#684d7c' },
+        { id: 'gas', name: 'Natural Gas', data: generateData(1500, 200), color: '#2d5a2d' },
+        { id: 'renewable', name: 'Renewables', data: generateData(400, 80), color: '#b8860b' },
+        { id: 'nuclear', name: 'Nuclear', data: generateData(600, 100), color: '#8b2635' }
+      ],
+      'energy-per-capita': [
+        { id: 'total-capita', name: 'Total per Capita', data: generateData(150, 30), color: '#684d7c' },
+        { id: 'urban-capita', name: 'Urban per Capita', data: generateData(180, 35), color: '#2d5a2d' },
+        { id: 'rural-capita', name: 'Rural per Capita', data: generateData(120, 25), color: '#b8860b' },
+        { id: 'industrial-capita', name: 'Industrial per Capita', data: generateData(200, 40), color: '#8b2635' },
+        { id: 'commercial-capita', name: 'Commercial per Capita', data: generateData(90, 20), color: '#2f4f4f' }
+      ],
+      'ghg-ebt': [
+        { id: 'coal-emissions', name: 'Coal Emissions', data: generateData(500, 80), color: '#2c2c2c' },
+        { id: 'gas-emissions', name: 'Gas Emissions', data: generateData(300, 50), color: '#684d7c' },
+        { id: 'transport-emissions', name: 'Transport Emissions', data: generateData(400, 60), color: '#2d5a2d' },
+        { id: 'industrial-emissions', name: 'Industrial Emissions', data: generateData(350, 55), color: '#b8860b' },
+        { id: 'residential-emissions', name: 'Residential Emissions', data: generateData(200, 35), color: '#8b2635' }
+      ],
+      'ghg-fossil-reduction': [
+        { id: 'coal-reduction', name: 'Coal Reduction', data: generateData(-50, 15), color: '#2c2c2c' },
+        { id: 'oil-reduction', name: 'Oil Reduction', data: generateData(-40, 12), color: '#684d7c' },
+        { id: 'gas-reduction', name: 'Gas Reduction', data: generateData(-30, 10), color: '#2d5a2d' },
+        { id: 'total-fossil-reduction', name: 'Total Fossil Reduction', data: generateData(-120, 25), color: '#b8860b' },
+        { id: 'renewable-increase', name: 'Renewable Increase', data: generateData(80, 20), color: '#8b2635' }
+      ],
+      'ghg-emissions': [
+        { id: 'co2', name: 'CO2 Emissions', data: generateData(800, 120), color: '#684d7c' },
+        { id: 'methane', name: 'Methane (CH4)', data: generateData(150, 25), color: '#2d5a2d' },
+        { id: 'nitrous-oxide', name: 'Nitrous Oxide (N2O)', data: generateData(80, 15), color: '#b8860b' },
+        { id: 'fluorinated', name: 'Fluorinated Gases', data: generateData(30, 8), color: '#8b2635' },
+        { id: 'total-ghg', name: 'Total GHG', data: generateData(1060, 150), color: '#2f4f4f' }
+      ]
+    };
+  }, []);
+
+  // Function to generate shaded area colors
   const generateColors = (baseColor) => {
     // Convert hex to RGB
     const hex = baseColor.replace('#', '');
@@ -30,73 +91,36 @@ const EnergyDashboard = () => {
     
     return {
       line: baseColor,
-      // Use rgba for proper transparency
-      lightArea: `rgba(${r}, ${g}, ${b}, 0.2)`, // 20% opacity for min-max range
-      mediumArea: `rgba(${r}, ${g}, ${b}, 0.4)` // 40% opacity for mean area highlight
+      lightShade: `rgba(${r}, ${g}, ${b}, 0.3)`, // Light shade for min to mean
+      darkShade: `rgba(${r}, ${g}, ${b}, 0.5)`   // Darker shade for mean to max
     };
   };
 
-  // Chart configurations with color variants
+  // Chart configurations using static data
   const chartConfigs = {
     'final-energy': {
       title: 'Final Energy Consumption',
-      charts: [
-        { id: 'electricity', name: 'Electricity', data: generateData(1200, 200), color: '#8884d8' },
-        { id: 'transport', name: 'Transportation', data: generateData(900, 150), color: '#82ca9d' },
-        { id: 'heating', name: 'Heating & Cooling', data: generateData(800, 120), color: '#ffc658' },
-        { id: 'industrial', name: 'Industrial Process', data: generateData(1100, 180), color: '#ff7c7c' },
-        { id: 'residential', name: 'Residential', data: generateData(600, 100), color: '#8dd1e1' }
-      ]
+      charts: staticData['final-energy']
     },
     'primary-energy': {
       title: 'Primary Energy Sources',
-      charts: [
-        { id: 'coal', name: 'Coal', data: generateData(2000, 300), color: '#2c2c2c' },
-        { id: 'oil', name: 'Oil', data: generateData(1800, 250), color: '#8884d8' },
-        { id: 'gas', name: 'Natural Gas', data: generateData(1500, 200), color: '#82ca9d' },
-        { id: 'renewable', name: 'Renewables', data: generateData(400, 80), color: '#ffc658' },
-        { id: 'nuclear', name: 'Nuclear', data: generateData(600, 100), color: '#ff7c7c' }
-      ]
+      charts: staticData['primary-energy']
     },
     'energy-per-capita': {
       title: 'Energy Consumption per Capita',
-      charts: [
-        { id: 'total-capita', name: 'Total per Capita', data: generateData(150, 30), color: '#8884d8' },
-        { id: 'urban-capita', name: 'Urban per Capita', data: generateData(180, 35), color: '#82ca9d' },
-        { id: 'rural-capita', name: 'Rural per Capita', data: generateData(120, 25), color: '#ffc658' },
-        { id: 'industrial-capita', name: 'Industrial per Capita', data: generateData(200, 40), color: '#ff7c7c' },
-        { id: 'commercial-capita', name: 'Commercial per Capita', data: generateData(90, 20), color: '#8dd1e1' }
-      ]
+      charts: staticData['energy-per-capita']
     },
     'ghg-ebt': {
       title: 'Emissions by Technology (EBT)',
-      charts: [
-        { id: 'coal-emissions', name: 'Coal Emissions', data: generateData(500, 80), color: '#2c2c2c' },
-        { id: 'gas-emissions', name: 'Gas Emissions', data: generateData(300, 50), color: '#8884d8' },
-        { id: 'transport-emissions', name: 'Transport Emissions', data: generateData(400, 60), color: '#82ca9d' },
-        { id: 'industrial-emissions', name: 'Industrial Emissions', data: generateData(350, 55), color: '#ffc658' },
-        { id: 'residential-emissions', name: 'Residential Emissions', data: generateData(200, 35), color: '#ff7c7c' }
-      ]
+      charts: staticData['ghg-ebt']
     },
     'ghg-fossil-reduction': {
       title: 'Fossil Energy Reduction',
-      charts: [
-        { id: 'coal-reduction', name: 'Coal Reduction', data: generateData(-50, 15), color: '#2c2c2c' },
-        { id: 'oil-reduction', name: 'Oil Reduction', data: generateData(-40, 12), color: '#8884d8' },
-        { id: 'gas-reduction', name: 'Gas Reduction', data: generateData(-30, 10), color: '#82ca9d' },
-        { id: 'total-fossil-reduction', name: 'Total Fossil Reduction', data: generateData(-120, 25), color: '#ffc658' },
-        { id: 'renewable-increase', name: 'Renewable Increase', data: generateData(80, 20), color: '#ff7c7c' }
-      ]
+      charts: staticData['ghg-fossil-reduction']
     },
     'ghg-emissions': {
       title: 'Total GHG Emissions',
-      charts: [
-        { id: 'co2', name: 'CO2 Emissions', data: generateData(800, 120), color: '#8884d8' },
-        { id: 'methane', name: 'Methane (CH4)', data: generateData(150, 25), color: '#82ca9d' },
-        { id: 'nitrous-oxide', name: 'Nitrous Oxide (N2O)', data: generateData(80, 15), color: '#ffc658' },
-        { id: 'fluorinated', name: 'Fluorinated Gases', data: generateData(30, 8), color: '#ff7c7c' },
-        { id: 'total-ghg', name: 'Total GHG', data: generateData(1060, 150), color: '#8dd1e1' }
-      ]
+      charts: staticData['ghg-emissions']
     }
   };
 
@@ -131,7 +155,7 @@ const EnergyDashboard = () => {
   const currentConfig = chartConfigs[activeMenu];
   const currentSelected = selectedCharts[activeMenu] || {};
 
-  // Prepare chart data with proper structure for range areas
+  // Prepare chart data with proper structure for dual shaded areas
   const chartData = useMemo(() => {
     if (!currentConfig) return [];
     
@@ -144,6 +168,9 @@ const EnergyDashboard = () => {
           dataPoint[`${chart.id}_mean`] = yearData.mean;
           dataPoint[`${chart.id}_min`] = yearData.min;
           dataPoint[`${chart.id}_max`] = yearData.max;
+          // Create separate data points for the two shaded areas
+          dataPoint[`${chart.id}_lower_area`] = yearData.mean - yearData.min;
+          dataPoint[`${chart.id}_upper_area`] = yearData.max - yearData.mean;
         }
       });
       return dataPoint;
@@ -325,27 +352,44 @@ const EnergyDashboard = () => {
                         
                         return (
                           <React.Fragment key={chart.id}>
-                            {/* Single area for min-max range with transparency */}
+                            {/* Lower shaded area (min to mean) */}
                             <Area
                               type="monotone"
-                              dataKey={`${chart.id}_max`}
+                              dataKey={`${chart.id}_mean`}
                               stroke="none"
-                              fill={colors.lightArea}
-                              stackId={chart.id}
+                              fill={colors.lightShade}
+                              stackId={`lower_${chart.id}`}
                             />
                             <Area
                               type="monotone"
                               dataKey={`${chart.id}_min`}
                               stroke="none"
                               fill="transparent"
-                              stackId={chart.id}
+                              stackId={`lower_${chart.id}`}
                             />
+                            
+                            {/* Upper shaded area (mean to max) */}
+                            <Area
+                              type="monotone"
+                              dataKey={`${chart.id}_max`}
+                              stroke="none"
+                              fill={colors.darkShade}
+                              stackId={`upper_${chart.id}`}
+                            />
+                            <Area
+                              type="monotone"
+                              dataKey={`${chart.id}_mean`}
+                              stroke="none"
+                              fill="transparent"
+                              stackId={`upper_${chart.id}`}
+                            />
+                            
                             {/* Mean line on top */}
                             <Line
                               type="monotone"
                               dataKey={`${chart.id}_mean`}
                               stroke={colors.line}
-                              strokeWidth={2.5}
+                              strokeWidth={3}
                               dot={{ fill: colors.line, strokeWidth: 2, r: 4 }}
                               activeDot={{ r: 6, stroke: colors.line, strokeWidth: 2, fill: '#fff' }}
                               name={chart.name}
