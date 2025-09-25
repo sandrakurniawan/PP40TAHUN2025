@@ -7,18 +7,45 @@ const EnergyDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedCharts, setSelectedCharts] = useState({});
 
-  // Sample data generator
+  // Sample data generator with more realistic ranges
   const generateData = (baseValue, variance) => {
     return Array.from({ length: 10 }, (_, i) => {
       const year = 2015 + i;
-      const mean = baseValue + (Math.random() - 0.5) * variance;
-      const min = mean - Math.random() * 20;
-      const max = mean + Math.random() * 30;
-      return { year, mean, min, max };
+      const mean = baseValue + (Math.random() - 0.5) * variance * 0.3;
+      const minVariation = Math.random() * variance * 0.2;
+      const maxVariation = Math.random() * variance * 0.3;
+      const min = mean - minVariation;
+      const max = mean + maxVariation;
+      return { year, mean: Math.round(mean * 100) / 100, min: Math.round(min * 100) / 100, max: Math.round(max * 100) / 100 };
     });
   };
 
-  // Chart configurations
+  // Function to generate shaded colors
+  const generateColors = (baseColor) => {
+    // Convert hex to RGB
+    const hex = baseColor.replace('#', '');
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+    
+    // Generate lighter color for min-to-mean area (30% opacity equivalent)
+    const lightR = Math.round(r + (255 - r) * 0.7);
+    const lightG = Math.round(g + (255 - g) * 0.7);
+    const lightB = Math.round(b + (255 - b) * 0.7);
+    
+    // Generate medium color for mean-to-max area (60% opacity equivalent)
+    const mediumR = Math.round(r + (255 - r) * 0.4);
+    const mediumG = Math.round(g + (255 - g) * 0.4);
+    const mediumB = Math.round(b + (255 - b) * 0.4);
+    
+    return {
+      line: baseColor,
+      lightArea: `rgb(${lightR}, ${lightG}, ${lightB})`,
+      mediumArea: `rgb(${mediumR}, ${mediumG}, ${mediumB})`
+    };
+  };
+
+  // Chart configurations with color variants
   const chartConfigs = {
     'final-energy': {
       title: 'Final Energy Consumption',
@@ -113,7 +140,7 @@ const EnergyDashboard = () => {
   const currentConfig = chartConfigs[activeMenu];
   const currentSelected = selectedCharts[activeMenu] || {};
 
-  // Prepare chart data
+  // Prepare chart data with proper structure for range areas
   const chartData = useMemo(() => {
     if (!currentConfig) return [];
     
@@ -126,6 +153,9 @@ const EnergyDashboard = () => {
           dataPoint[`${chart.id}_mean`] = yearData.mean;
           dataPoint[`${chart.id}_min`] = yearData.min;
           dataPoint[`${chart.id}_max`] = yearData.max;
+          // Create range areas
+          dataPoint[`${chart.id}_range_lower`] = [yearData.min, yearData.mean];
+          dataPoint[`${chart.id}_range_upper`] = [yearData.mean, yearData.max];
         }
       });
       return dataPoint;
@@ -300,30 +330,48 @@ const EnergyDashboard = () => {
                       {currentConfig.charts.map((chart) => {
                         if (!currentSelected[chart.id]) return null;
                         
+                        const colors = generateColors(chart.color);
+                        
                         return (
                           <React.Fragment key={chart.id}>
+                            {/* Area from min to max */}
                             <Area
                               type="monotone"
                               dataKey={`${chart.id}_max`}
-                              stackId={chart.id}
                               stroke="none"
-                              fill={chart.color}
-                              fillOpacity={0.1}
+                              fill={colors.lightArea}
+                              fillOpacity={1}
                             />
+                            {/* Area from min to mean (creating the lower shaded region) */}
                             <Area
                               type="monotone"
                               dataKey={`${chart.id}_min`}
-                              stackId={chart.id}
                               stroke="none"
                               fill="#ffffff"
                               fillOpacity={1}
                             />
+                            {/* Area from mean to max (creating the upper shaded region) */}
+                            <Area
+                              type="monotone"
+                              dataKey={`${chart.id}_max`}
+                              stroke="none"
+                              fill={colors.mediumArea}
+                              fillOpacity={1}
+                            />
+                            <Area
+                              type="monotone"
+                              dataKey={`${chart.id}_mean`}
+                              stroke="none"
+                              fill="#ffffff"
+                              fillOpacity={1}
+                            />
+                            {/* Mean line */}
                             <Line
                               type="monotone"
                               dataKey={`${chart.id}_mean`}
-                              stroke={chart.color}
+                              stroke={colors.line}
                               strokeWidth={2}
-                              dot={{ fill: chart.color, strokeWidth: 2, r: 4 }}
+                              dot={{ fill: colors.line, strokeWidth: 2, r: 4 }}
                               name={chart.name}
                             />
                           </React.Fragment>
