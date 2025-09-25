@@ -187,6 +187,7 @@ const EnergyDashboard = () => {
     }));
   };
 
+  // Simplified Custom Tooltip - only shows range values
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       // Filter out area components from tooltip, only show lines
@@ -194,7 +195,7 @@ const EnergyDashboard = () => {
       
       return (
         <div className="bg-white p-3 border border-gray-300 rounded shadow-lg">
-          <p className="font-medium">{`Year: ${label}`}</p>
+          <p className="font-medium mb-2">{`Year: ${label}`}</p>
           {linePayload.map((entry, index) => {
             const chartId = entry.dataKey.replace('_mean', '');
             const chart = currentConfig.charts.find(c => c.id === chartId);
@@ -202,12 +203,9 @@ const EnergyDashboard = () => {
             const maxValue = entry.payload[`${chartId}_max`];
             
             return (
-              <div key={index} className="mt-1">
-                <p style={{ color: entry.color }}>
-                  {`${chart?.name}: ${entry.value?.toFixed(2)}`}
-                </p>
-                <p className="text-xs text-gray-500">
-                  {`Range: ${minValue?.toFixed(2)} - ${maxValue?.toFixed(2)}`}
+              <div key={index} className="mb-1">
+                <p style={{ color: entry.color }} className="font-medium">
+                  {`${chart?.name}: ${minValue?.toFixed(2)} - ${maxValue?.toFixed(2)}`}
                 </p>
               </div>
             );
