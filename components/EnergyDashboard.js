@@ -216,7 +216,7 @@ const EnergyDashboard = () => {
             
             return (
               <div key={index} className="mb-1">
-                <p style={{ color: entry.color }} className="font-bold text-sm">
+                <p style={{ color: chart?.color || '#333' }} className="font-bold text-sm">
                   {`${chart?.name}: ${minValue?.toFixed(2)} - ${maxValue?.toFixed(2)}`}
                 </p>
               </div>
