@@ -20,7 +20,7 @@ const EnergyDashboard = () => {
     });
   };
 
-  // Function to generate shaded colors
+  // Function to generate transparent shaded colors
   const generateColors = (baseColor) => {
     // Convert hex to RGB
     const hex = baseColor.replace('#', '');
@@ -28,20 +28,11 @@ const EnergyDashboard = () => {
     const g = parseInt(hex.substr(2, 2), 16);
     const b = parseInt(hex.substr(4, 2), 16);
     
-    // Generate lighter color for min-to-mean area (30% opacity equivalent)
-    const lightR = Math.round(r + (255 - r) * 0.7);
-    const lightG = Math.round(g + (255 - g) * 0.7);
-    const lightB = Math.round(b + (255 - b) * 0.7);
-    
-    // Generate medium color for mean-to-max area (60% opacity equivalent)
-    const mediumR = Math.round(r + (255 - r) * 0.4);
-    const mediumG = Math.round(g + (255 - g) * 0.4);
-    const mediumB = Math.round(b + (255 - b) * 0.4);
-    
     return {
       line: baseColor,
-      lightArea: `rgb(${lightR}, ${lightG}, ${lightB})`,
-      mediumArea: `rgb(${mediumR}, ${mediumG}, ${mediumB})`
+      // Use rgba for proper transparency
+      lightArea: `rgba(${r}, ${g}, ${b}, 0.2)`, // 20% opacity for min-max range
+      mediumArea: `rgba(${r}, ${g}, ${b}, 0.4)` // 40% opacity for mean area highlight
     };
   };
 
@@ -153,9 +144,6 @@ const EnergyDashboard = () => {
           dataPoint[`${chart.id}_mean`] = yearData.mean;
           dataPoint[`${chart.id}_min`] = yearData.min;
           dataPoint[`${chart.id}_max`] = yearData.max;
-          // Create range areas
-          dataPoint[`${chart.id}_range_lower`] = [yearData.min, yearData.mean];
-          dataPoint[`${chart.id}_range_upper`] = [yearData.mean, yearData.max];
         }
       });
       return dataPoint;
@@ -174,28 +162,28 @@ const EnergyDashboard = () => {
 
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
+      // Filter out area components from tooltip, only show lines
+      const linePayload = payload.filter(entry => entry.dataKey && entry.dataKey.includes('_mean'));
+      
       return (
         <div className="bg-white p-3 border border-gray-300 rounded shadow-lg">
           <p className="font-medium">{`Year: ${label}`}</p>
-          {payload.map((entry, index) => {
-            if (entry.dataKey.includes('_mean')) {
-              const chartId = entry.dataKey.replace('_mean', '');
-              const chart = currentConfig.charts.find(c => c.id === chartId);
-              const minValue = entry.payload[`${chartId}_min`];
-              const maxValue = entry.payload[`${chartId}_max`];
-              
-              return (
-                <div key={index} className="mt-1">
-                  <p style={{ color: entry.color }}>
-                    {`${chart?.name}: ${entry.value?.toFixed(2)}`}
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    {`Range: ${minValue?.toFixed(2)} - ${maxValue?.toFixed(2)}`}
-                  </p>
-                </div>
-              );
-            }
-            return null;
+          {linePayload.map((entry, index) => {
+            const chartId = entry.dataKey.replace('_mean', '');
+            const chart = currentConfig.charts.find(c => c.id === chartId);
+            const minValue = entry.payload[`${chartId}_min`];
+            const maxValue = entry.payload[`${chartId}_max`];
+            
+            return (
+              <div key={index} className="mt-1">
+                <p style={{ color: entry.color }}>
+                  {`${chart?.name}: ${entry.value?.toFixed(2)}`}
+                </p>
+                <p className="text-xs text-gray-500">
+                  {`Range: ${minValue?.toFixed(2)} - ${maxValue?.toFixed(2)}`}
+                </p>
+              </div>
+            );
           })}
         </div>
       );
@@ -325,7 +313,10 @@ const EnergyDashboard = () => {
                         fontSize={12}
                       />
                       <Tooltip content={<CustomTooltip />} />
-                      <Legend />
+                      <Legend 
+                        wrapperStyle={{ paddingTop: '20px' }}
+                        iconType="line"
+                      />
                       
                       {currentConfig.charts.map((chart) => {
                         if (!currentSelected[chart.id]) return null;
@@ -334,44 +325,29 @@ const EnergyDashboard = () => {
                         
                         return (
                           <React.Fragment key={chart.id}>
-                            {/* Area from min to max */}
+                            {/* Single area for min-max range with transparency */}
                             <Area
                               type="monotone"
                               dataKey={`${chart.id}_max`}
                               stroke="none"
                               fill={colors.lightArea}
-                              fillOpacity={1}
+                              stackId={chart.id}
                             />
-                            {/* Area from min to mean (creating the lower shaded region) */}
                             <Area
                               type="monotone"
                               dataKey={`${chart.id}_min`}
                               stroke="none"
-                              fill="#ffffff"
-                              fillOpacity={1}
+                              fill="transparent"
+                              stackId={chart.id}
                             />
-                            {/* Area from mean to max (creating the upper shaded region) */}
-                            <Area
-                              type="monotone"
-                              dataKey={`${chart.id}_max`}
-                              stroke="none"
-                              fill={colors.mediumArea}
-                              fillOpacity={1}
-                            />
-                            <Area
-                              type="monotone"
-                              dataKey={`${chart.id}_mean`}
-                              stroke="none"
-                              fill="#ffffff"
-                              fillOpacity={1}
-                            />
-                            {/* Mean line */}
+                            {/* Mean line on top */}
                             <Line
                               type="monotone"
                               dataKey={`${chart.id}_mean`}
                               stroke={colors.line}
-                              strokeWidth={2}
+                              strokeWidth={2.5}
                               dot={{ fill: colors.line, strokeWidth: 2, r: 4 }}
+                              activeDot={{ r: 6, stroke: colors.line, strokeWidth: 2, fill: '#fff' }}
                               name={chart.name}
                             />
                           </React.Fragment>
