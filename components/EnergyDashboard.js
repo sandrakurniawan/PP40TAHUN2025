@@ -190,13 +190,25 @@ const EnergyDashboard = () => {
   // Simplified Custom Tooltip - only shows range values
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
-      // Filter out area components from tooltip, only show lines
+      // Filter out area components from tooltip, only show lines and remove duplicates
       const linePayload = payload.filter(entry => entry.dataKey && entry.dataKey.includes('_mean'));
+      
+      // Remove duplicates by creating a unique set based on chart ID
+      const uniqueEntries = [];
+      const seenChartIds = new Set();
+      
+      linePayload.forEach(entry => {
+        const chartId = entry.dataKey.replace('_mean', '');
+        if (!seenChartIds.has(chartId)) {
+          seenChartIds.add(chartId);
+          uniqueEntries.push(entry);
+        }
+      });
       
       return (
         <div className="bg-white p-3 border border-gray-300 rounded shadow-lg">
           <p className="font-medium mb-2">{`Year: ${label}`}</p>
-          {linePayload.map((entry, index) => {
+          {uniqueEntries.map((entry, index) => {
             const chartId = entry.dataKey.replace('_mean', '');
             const chart = currentConfig.charts.find(c => c.id === chartId);
             const minValue = entry.payload[`${chartId}_min`];
