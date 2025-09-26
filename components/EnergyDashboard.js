@@ -355,7 +355,7 @@ const EnergyDashboard = () => {
     };
   }, []);
 
-  // Function to generate shaded area colors
+  // Function to generate transparent colors for overlapping
   const generateColors = (baseColor) => {
     // Convert hex to RGB
     const hex = baseColor.replace('#', '');
@@ -365,8 +365,7 @@ const EnergyDashboard = () => {
     
     return {
       line: baseColor,
-      lightShade: `rgba(${r}, ${g}, ${b}, 0.3)`, // Light shade for min to mean
-      darkShade: `rgba(${r}, ${g}, ${b}, 0.5)`   // Darker shade for mean to max
+      areaFill: `rgba(${r}, ${g}, ${b}, 0.15)` // Single transparent fill for uncertainty band
     };
   };
 
@@ -429,7 +428,7 @@ const EnergyDashboard = () => {
   const currentConfig = chartConfigs[activeMenu];
   const currentSelected = selectedCharts[activeMenu] || {};
 
-  // Prepare chart data with proper structure for dual shaded areas
+  // Prepare chart data with proper structure for transparent overlapping areas
   const chartData = useMemo(() => {
     if (!currentConfig) return [];
     
@@ -463,21 +462,35 @@ const EnergyDashboard = () => {
 
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
+      // Group payload by chart
+      const chartData = {};
+      payload.forEach(entry => {
+        if (entry.dataKey) {
+          const [chartId, dataType] = entry.dataKey.split('_');
+          if (!chartData[chartId]) {
+            chartData[chartId] = {};
+          }
+          chartData[chartId][dataType] = entry.value;
+        }
+      });
+
       return (
         <div className="bg-white p-4 border rounded-lg shadow-lg">
           <p className="font-semibold">{`Year: ${label}`}</p>
-          {payload.map((entry) => {
-            // Only show mean values in tooltip to avoid clutter
-            if (entry.dataKey && entry.dataKey.includes('_mean')) {
-              const chartName = entry.dataKey.replace('_mean', '');
-              const chart = currentConfig.charts.find(c => c.id === chartName);
-              return (
-                <p key={entry.dataKey} style={{ color: entry.color }}>
-                  {`${chart?.name}: ${entry.value}`}
+          {Object.entries(chartData).map(([chartId, data]) => {
+            const chart = currentConfig.charts.find(c => c.id === chartId);
+            if (!chart || !data.mean) return null;
+            
+            return (
+              <div key={chartId} className="mt-1">
+                <p style={{ color: chart.color }} className="font-medium">
+                  {chart.name}
                 </p>
-              );
-            }
-            return null;
+                <p className="text-sm text-gray-600 ml-2">
+                  Mean: {data.mean} | Range: {data.min} - {data.max}
+                </p>
+              </div>
+            );
           })}
         </div>
       );
@@ -587,59 +600,70 @@ const EnergyDashboard = () => {
               <Tooltip content={<CustomTooltip />} />
               <Legend />
               
-              {/* Render areas and lines for each selected chart */}
+              {/* First render all uncertainty areas (behind lines) */}
               {currentConfig?.charts.map((chart) => {
                 if (!currentSelected[chart.id]) return null;
                 
                 const colors = generateColors(chart.color);
                 
                 return (
-                  <React.Fragment key={chart.id}>
-                    {/* Area from min to max */}
-                    <Area
-                      type="monotone"
-                      dataKey={`${chart.id}_max`}
-                      stroke="none"
-                      fill={colors.lightShade}
-                      fillOpacity={0.3}
-                      stackId={chart.id}
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey={`${chart.id}_min`}
-                      stroke="none"
-                      fill="white"
-                      fillOpacity={1}
-                      stackId={chart.id}
-                    />
-                    
-                    {/* Mean line */}
-                    <Line
-                      type="monotone"
-                      dataKey={`${chart.id}_mean`}
-                      stroke={colors.line}
-                      strokeWidth={2}
-                      dot={{ fill: colors.line, strokeWidth: 2, r: 4 }}
-                      name={chart.name}
-                    />
-                  </React.Fragment>
+                  <Area
+                    key={`area-${chart.id}`}
+                    type="monotone"
+                    dataKey={`${chart.id}_max`}
+                    stroke="none"
+                    fill={colors.areaFill}
+                    fillOpacity={1}
+                  />
+                );
+              })}
+              
+              {/* Then render all mean lines (in front of areas) */}
+              {currentConfig?.charts.map((chart) => {
+                if (!currentSelected[chart.id]) return null;
+                
+                const colors = generateColors(chart.color);
+                
+                return (
+                  <Line
+                    key={`line-${chart.id}`}
+                    type="monotone"
+                    dataKey={`${chart.id}_mean`}
+                    stroke={colors.line}
+                    strokeWidth={3}
+                    dot={{ fill: colors.line, strokeWidth: 2, r: 5 }}
+                    name={chart.name}
+                  />
                 );
               })}
             </ComposedChart>
           </ResponsiveContainer>
         </div>
 
-        {/* Legend for uncertainty bands */}
+        {/* Enhanced Legend */}
         <div className="mt-4 bg-white rounded-lg shadow-sm p-4">
-          <h3 className="font-medium mb-2">Chart Legend</h3>
-          <div className="text-sm text-gray-600">
-            <div className="flex items-center gap-2 mb-1">
-              <div className="w-4 h-0.5 bg-gray-800"></div>
-              <span>Mean projection</span>
+          <h3 className="font-medium mb-3">Chart Legend</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 className="text-sm font-medium text-gray-700 mb-2">Visual Elements</h4>
+              <div className="space-y-2 text-sm text-gray-600">
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-0.5 bg-gray-800"></div>
+                  <span>Mean projection (solid line)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-3 bg-gray-400 opacity-30"></div>
+                  <span>Uncertainty range (transparent shaded area)</span>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-3 bg-gray-300 opacity-50"></div>
-              <span>Uncertainty range (min-max)</span>
+            <div>
+              <h4 className="text-sm font-medium text-gray-700 mb-2">Interaction</h4>
+              <div className="text-sm text-gray-600">
+                <p>• Click chart toggles to show/hide individual series</p>
+                <p>• Hover over chart for detailed values</p>
+                <p>• All charts can be displayed simultaneously with transparent overlays</p>
+              </div>
             </div>
           </div>
         </div>
