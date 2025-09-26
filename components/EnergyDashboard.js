@@ -67,18 +67,6 @@ const EnergyDashboard = () => {
           ]
         }
       ],
-              { 
-          id: 'rumahtangga', 
-          name: 'Rumah Tangga', 
-          color: '#2f4f4f',
-          data: [
-            { year: 2030, min: 29, mean: 31.65, max: 34.3 },
-            { year: 2040, min: 34.3, mean: 39.45, max: 44.6 },
-            { year: 2050, min: 41.2, mean: 44.05, max: 46.9 },
-            { year: 2060, min: 46.3, mean: 49, max: 51.7 }
-          ]
-        }
-      ],
       'primary-energy': [
         { 
           id: 'coal', 
@@ -422,7 +410,7 @@ const EnergyDashboard = () => {
   }, []);
 
   const menuItems = [
-    { id: 'final-energy-sector', name: 'pemanfaatan Energi Final', hasSubmenu: false },
+    { id: 'final-energy-sector', name: 'Energi Final Total', hasSubmenu: false },
     { id: 'primary-energy', name: 'Primary Energy', hasSubmenu: false },
     { id: 'energy-per-capita', name: 'Energy per Capita', hasSubmenu: false },
     {
