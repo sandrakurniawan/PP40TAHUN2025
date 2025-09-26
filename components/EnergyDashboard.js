@@ -460,9 +460,10 @@ const EnergyDashboard = () => {
     }));
   };
 
+  // Improved Custom Tooltip - shows range in format like reference
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
-      // Group payload by chart
+      // Filter out area components and get unique chart entries
       const chartData = {};
       payload.forEach(entry => {
         if (entry.dataKey) {
@@ -471,23 +472,31 @@ const EnergyDashboard = () => {
             chartData[chartId] = {};
           }
           chartData[chartId][dataType] = entry.value;
+          chartData[chartId].payload = entry.payload;
         }
       });
 
+      // Only show entries that have complete data (mean values)
+      const validEntries = Object.entries(chartData).filter(([chartId, data]) => {
+        return data.mean !== undefined && currentSelected[chartId];
+      });
+
+      if (validEntries.length === 0) return null;
+
       return (
-        <div className="bg-white p-4 border rounded-lg shadow-lg">
-          <p className="font-semibold">{`Year: ${label}`}</p>
-          {Object.entries(chartData).map(([chartId, data]) => {
+        <div className="bg-white p-3 border border-gray-300 rounded shadow-lg">
+          <p className="font-medium mb-2">{`Year: ${label}`}</p>
+          {validEntries.map(([chartId, data]) => {
             const chart = currentConfig.charts.find(c => c.id === chartId);
-            if (!chart || !data.mean) return null;
+            if (!chart) return null;
+            
+            const minValue = data.payload[`${chartId}_min`];
+            const maxValue = data.payload[`${chartId}_max`];
             
             return (
-              <div key={chartId} className="mt-1">
-                <p style={{ color: chart.color }} className="font-medium">
-                  {chart.name}
-                </p>
-                <p className="text-sm text-gray-600 ml-2">
-                  Mean: {data.mean} | Range: {data.min} - {data.max}
+              <div key={chartId} className="mb-1">
+                <p style={{ color: chart.color }} className="font-bold text-sm">
+                  {`${chart.name}: ${minValue?.toFixed(2)} - ${maxValue?.toFixed(2)}`}
                 </p>
               </div>
             );
