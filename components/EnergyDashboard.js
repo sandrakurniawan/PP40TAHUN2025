@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+aimport React, { useState, useMemo } from 'react';
 import { LineChart, Line, Area, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Menu, X, ChevronDown, Filter } from 'lucide-react';
 
@@ -10,60 +10,72 @@ const EnergyDashboard = () => {
   // Deterministic data with 4 time periods: 2030, 2040, 2050, 2060
   const staticData = useMemo(() => {
     return {
-      'final-energy': [
+      'final-energy-sector': [
         { 
-          id: 'electricity', 
-          name: 'Electricity', 
+          id: 'final', 
+          name: 'Energi Final Total', 
           color: '#684d7c',
           data: [
-            { year: 2030, min: 1400, mean: 1500, max: 1600 },
-            { year: 2040, min: 1550, mean: 1650, max: 1750 },
-            { year: 2050, min: 1700, mean: 1800, max: 1900 },
-            { year: 2060, min: 1850, mean: 1950, max: 2050 }
+            { year: 2030, min: 255.1, mean: 277.05, max: 299 },
+            { year: 2040, min: 303.9, mean: 331.4, max: 358.9 },
+            { year: 2050, min: 354.6, mean: 384.65, max: 414.7 },
+            { year: 2060, min: 378.5, mean: 405.65, max: 432.8 }
           ]
         },
         { 
-          id: 'transport', 
-          name: 'Transportation', 
+          id: 'industri', 
+          name: 'Industri', 
           color: '#2d5a2d',
           data: [
-            { year: 2030, min: 850, mean: 950, max: 1050 },
-            { year: 2040, min: 750, mean: 850, max: 950 },
-            { year: 2050, min: 650, mean: 750, max: 850 },
-            { year: 2060, min: 550, mean: 650, max: 750 }
+            { year: 2030, min: 127.9, mean: 140.65, max: 153.4 },
+            { year: 2040, min: 168.9, mean: 182.75, max: 196.6 },
+            { year: 2050, min: 215.4, mean: 233.7, max: 252 },
+            { year: 2060, min: 246.7, mean: 260.35, max: 274 }
           ]
         },
         { 
-          id: 'heating', 
-          name: 'Heating & Cooling', 
+          id: 'Transportasi', 
+          name: 'Transportasi', 
           color: '#b8860b',
           data: [
-            { year: 2030, min: 750, mean: 850, max: 950 },
-            { year: 2040, min: 700, mean: 800, max: 900 },
-            { year: 2050, min: 650, mean: 750, max: 850 },
-            { year: 2060, min: 600, mean: 700, max: 800 }
+            { year: 2030, min: 127.9, mean: 140.65, max: 153.4 },
+            { year: 2040, min: 168.9, mean: 182.75, max: 196.6 },
+            { year: 2050, min: 215.4, mean: 233.7, max: 252 },
+            { year: 2060, min: 246.7, mean: 260.35, max: 274 }
           ]
         },
         { 
-          id: 'industrial', 
-          name: 'Industrial Process', 
+          id: 'komersial', 
+          name: 'Komersial', 
           color: '#8b2635',
           data: [
-            { year: 2030, min: 1200, mean: 1300, max: 1400 },
-            { year: 2040, min: 1350, mean: 1450, max: 1550 },
-            { year: 2050, min: 1500, mean: 1600, max: 1700 },
-            { year: 2060, min: 1650, mean: 1750, max: 1850 }
+            { year: 2030, min: 11.2, mean: 13.4, max: 15.6 },
+            { year: 2040, min: 14.8, mean: 17.85, max: 20.9 },
+            { year: 2050, min: 18.4, mean: 22, max: 25.6 },
+            { year: 2060, min: 20.8, mean: 24, max: 27.2 }
           ]
         },
         { 
-          id: 'residential', 
-          name: 'Residential', 
+          id: 'rumahtangga', 
+          name: 'Rumah Tangga', 
           color: '#2f4f4f',
           data: [
-            { year: 2030, min: 600, mean: 700, max: 800 },
-            { year: 2040, min: 650, mean: 750, max: 850 },
-            { year: 2050, min: 700, mean: 800, max: 900 },
-            { year: 2060, min: 750, mean: 850, max: 950 }
+            { year: 2030, min: 29, mean: 31.65, max: 34.3 },
+            { year: 2040, min: 34.3, mean: 39.45, max: 44.6 },
+            { year: 2050, min: 41.2, mean: 44.05, max: 46.9 },
+            { year: 2060, min: 46.3, mean: 49, max: 51.7 }
+          ]
+        }
+      ],
+              { 
+          id: 'rumahtangga', 
+          name: 'Rumah Tangga', 
+          color: '#2f4f4f',
+          data: [
+            { year: 2030, min: 29, mean: 31.65, max: 34.3 },
+            { year: 2040, min: 34.3, mean: 39.45, max: 44.6 },
+            { year: 2050, min: 41.2, mean: 44.05, max: 46.9 },
+            { year: 2060, min: 46.3, mean: 49, max: 51.7 }
           ]
         }
       ],
@@ -371,8 +383,8 @@ const EnergyDashboard = () => {
 
   // Chart configurations using static data
   const chartConfigs = {
-    'final-energy': {
-      title: 'Final Energy Consumption',
+    'final-energy-sector': {
+      title: 'pemanfaatan Energi Final',
       charts: staticData['final-energy']
     },
     'primary-energy': {
@@ -410,7 +422,7 @@ const EnergyDashboard = () => {
   }, []);
 
   const menuItems = [
-    { id: 'final-energy', name: 'Final Energy', hasSubmenu: false },
+    { id: 'final-energy-sector', name: 'pemanfaatan Energi Final', hasSubmenu: false },
     { id: 'primary-energy', name: 'Primary Energy', hasSubmenu: false },
     { id: 'energy-per-capita', name: 'Energy per Capita', hasSubmenu: false },
     {
