@@ -1,80 +1,11 @@
-const toggleChartVisibility = (chartId) => {
-    setSelectedCharts(prev => ({
-      ...prev,
-      [activeMenu]: {
-        ...prev[activeMenu],
-        [chartId]: !prev[activeMenu]?.[chartId]
-      }
-    }));
-  };
-
-  const DataTable = () => {
-    const data = viewMode === 'comparison' ? comparisonData : chartData;
-    const selectedChartsList = currentConfig?.charts.filter(c => currentSelected[c.id]) || [];
-    
-    return (
-      <div className="bg-white rounded-lg shadow-sm p-6 mt-6">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold">Data Table</h3>
-          <button
-            onClick={() => setShowDataTable(false)}
-            className="p-2 hover:bg-gray-100 rounded"
-          >
-            <X size={16} />
-          </button>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="border-b-2 border-gray-200">
-                <th className="text-left p-2 font-semibold">Year</th>
-                {selectedChartsList.map(chart => (
-                  <th key={chart.id} className="text-left p-2 font-semibold">
-                    {chart.name}
-                    {viewMode === 'uncertainty' && (
-                      <div className="text-xs font-normal text-gray-500">
-                        Min / Mean / Max
-                      </div>
-                    )}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {data.map(row => (
-                <tr key={row.year} className="border-b border-gray-100 hover:bg-gray-50">
-                  <td className="p-2 font-medium">{row.year}</td>
-                  {selectedChartsList.map(chart => (
-                    <td key={chart.id} className="p-2">
-                      {viewMode === 'comparison' ? (
-                        <span>{row[chart.id]?.toLocaleString() || '-'}</span>
-                      ) : (
-                        <div className="text-sm">
-                          <div>{row[`${chart.id}_min`]?.toLocaleString() || '-'}</div>
-                          <div className="font-medium">{row[`${chart.id}_mean`]?.toLocaleString() || '-'}</div>
-                          <div>{row[`${chart.id}_max`]?.toLocaleString() || '-'}</div>
-                        </div>
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    );
-  };import React, { useState, useMemo } from 'react';
-import { LineChart, Line, Area, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
-import { Menu, X, ChevronDown, Filter, BarChart3, TrendingUp, Table, Download, Settings } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { LineChart, Line, Area, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { Menu, X, ChevronDown, Filter } from 'lucide-react';
 
 const EnergyDashboard = () => {
   const [activeMenu, setActiveMenu] = useState('final-energy');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedCharts, setSelectedCharts] = useState({});
-  const [viewMode, setViewMode] = useState('uncertainty'); // 'uncertainty' or 'comparison'
-  const [selectedYears, setSelectedYears] = useState([2030, 2040, 2050, 2060]);
-  const [showDataTable, setShowDataTable] = useState(false);
 
   // Deterministic data with 4 time periods: 2030, 2040, 2050, 2060
   const staticData = useMemo(() => {
@@ -520,122 +451,34 @@ const EnergyDashboard = () => {
     });
   }, [currentConfig, currentSelected]);
 
-  // Prepare comparison data for bar chart view
-  const comparisonData = useMemo(() => {
-    if (!currentConfig || viewMode !== 'comparison') return [];
-    
-    return selectedYears.map(year => {
-      const dataPoint = { year };
-      currentConfig.charts.forEach(chart => {
-        if (currentSelected[chart.id]) {
-          const yearData = chart.data.find(d => d.year === year);
-          if (yearData) {
-            dataPoint[chart.id] = yearData.mean;
-          }
-        }
-      });
-      return dataPoint;
-    });
-  }, [currentConfig, currentSelected, selectedYears, viewMode]);
-
-  const toggleYear = (year) => {
-    setSelectedYears(prev => 
-      prev.includes(year) 
-        ? prev.filter(y => y !== year)
-        : [...prev, year].sort()
-    );
-  };
-
-  const getUnit = (menuId) => {
-    switch(menuId) {
-      case 'final-energy':
-      case 'primary-energy':
-        return 'TWh';
-      case 'energy-per-capita':
-        return 'MWh/person';
-      case 'ghg-ebt':
-      case 'ghg-emissions':
-        return 'Mt CO2eq';
-      case 'ghg-fossil-reduction':
-        return 'Mt CO2eq change';
-      default:
-        return 'Units';
-    }
-  };
-
-  const exportData = () => {
-    const dataToExport = viewMode === 'comparison' ? comparisonData : chartData;
-    const csvContent = [
-      // Header
-      ['Year', ...currentConfig.charts.filter(c => currentSelected[c.id]).map(c => c.name)],
-      // Data rows
-      ...dataToExport.map(row => [
-        row.year,
-        ...currentConfig.charts.filter(c => currentSelected[c.id]).map(c => 
-          viewMode === 'comparison' ? row[c.id] : row[`${c.id}_mean`]
-        )
-      ])
-    ].map(row => row.join(',')).join('\n');
-    
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${activeMenu}_data.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
+  const toggleChartVisibility = (chartId) => {
+    setSelectedCharts(prev => ({
+      ...prev,
+      [activeMenu]: {
+        ...prev[activeMenu],
+        [chartId]: !prev[activeMenu]?.[chartId]
+      }
+    }));
   };
 
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
-      const relevantData = [];
-      
-      // Group data by chart
-      const chartGroups = {};
-      payload.forEach(entry => {
-        if (entry.dataKey) {
-          const [chartId, type] = entry.dataKey.split('_');
-          if (!chartGroups[chartId]) {
-            chartGroups[chartId] = {};
-          }
-          chartGroups[chartId][type] = entry.value;
-        }
-      });
-
-      // Convert to display format
-      Object.keys(chartGroups).forEach(chartId => {
-        const chart = currentConfig.charts.find(c => c.id === chartId);
-        const data = chartGroups[chartId];
-        if (chart && data.mean !== undefined) {
-          relevantData.push({
-            name: chart.name,
-            color: chart.color,
-            min: data.min,
-            mean: data.mean,
-            max: data.max
-          });
-        }
-      });
-
       return (
-        <div className="bg-white p-4 border rounded-lg shadow-lg min-w-64">
-          <p className="font-semibold text-lg mb-3">{`Year: ${label}`}</p>
-          {relevantData.map((item) => (
-            <div key={item.name} className="mb-2">
-              <div className="flex items-center gap-2 mb-1">
-                <div 
-                  className="w-3 h-3 rounded"
-                  style={{ backgroundColor: item.color }}
-                ></div>
-                <span className="font-medium">{item.name}</span>
-              </div>
-              <div className="text-sm text-gray-600 ml-5">
-                <div>Min: <span className="font-medium">{item.min?.toLocaleString()}</span></div>
-                <div>Mean: <span className="font-medium text-gray-800">{item.mean?.toLocaleString()}</span></div>
-                <div>Max: <span className="font-medium">{item.max?.toLocaleString()}</span></div>
-              </div>
-            </div>
-          ))}
+        <div className="bg-white p-4 border rounded-lg shadow-lg">
+          <p className="font-semibold">{`Year: ${label}`}</p>
+          {payload.map((entry) => {
+            // Only show mean values in tooltip to avoid clutter
+            if (entry.dataKey && entry.dataKey.includes('_mean')) {
+              const chartName = entry.dataKey.replace('_mean', '');
+              const chart = currentConfig.charts.find(c => c.id === chartName);
+              return (
+                <p key={entry.dataKey} style={{ color: entry.color }}>
+                  {`${chart?.name}: ${entry.value}`}
+                </p>
+              );
+            }
+            return null;
+          })}
         </div>
       );
     }
@@ -698,88 +541,15 @@ const EnergyDashboard = () => {
       {/* Main Content */}
       <div className="flex-1 p-6 overflow-auto">
         <div className="mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-3xl font-bold text-gray-800">
-              {currentConfig?.title}
-            </h1>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={exportData}
-                className="flex items-center gap-2 px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-              >
-                <Download size={16} />
-                Export CSV
-              </button>
-              <button
-                onClick={() => setShowDataTable(!showDataTable)}
-                className="flex items-center gap-2 px-3 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
-              >
-                <Table size={16} />
-                {showDataTable ? 'Hide Table' : 'Show Table'}
-              </button>
-            </div>
-          </div>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+            {currentConfig?.title}
+          </h1>
           
-          {/* View Mode Toggle */}
+          {/* Chart toggles */}
           <div className="bg-white p-4 rounded-lg shadow-sm mb-4">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <Settings size={20} />
-                <span className="font-medium">Chart Settings</span>
-              </div>
-              <div className="flex bg-gray-100 rounded-lg p-1">
-                <button
-                  onClick={() => setViewMode('uncertainty')}
-                  className={`flex items-center gap-2 px-3 py-1 rounded transition-colors ${
-                    viewMode === 'uncertainty' 
-                      ? 'bg-white shadow-sm text-blue-600' 
-                      : 'text-gray-600 hover:text-gray-800'
-                  }`}
-                >
-                  <TrendingUp size={16} />
-                  Uncertainty View
-                </button>
-                <button
-                  onClick={() => setViewMode('comparison')}
-                  className={`flex items-center gap-2 px-3 py-1 rounded transition-colors ${
-                    viewMode === 'comparison' 
-                      ? 'bg-white shadow-sm text-blue-600' 
-                      : 'text-gray-600 hover:text-gray-800'
-                  }`}
-                >
-                  <BarChart3 size={16} />
-                  Comparison View
-                </button>
-              </div>
-            </div>
-            
-            {/* Year Selection for Comparison Mode */}
-            {viewMode === 'comparison' && (
-              <div className="mb-3">
-                <span className="text-sm font-medium text-gray-700 mb-2 block">Select Years:</span>
-                <div className="flex gap-2">
-                  {[2030, 2040, 2050, 2060].map(year => (
-                    <button
-                      key={year}
-                      onClick={() => toggleYear(year)}
-                      className={`px-3 py-1 rounded text-sm transition-colors ${
-                        selectedYears.includes(year)
-                          ? 'bg-blue-500 text-white'
-                          : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
-                      }`}
-                    >
-                      {year}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-            
-            {/* Chart toggles */}
             <div className="flex items-center gap-2 mb-3">
               <Filter size={20} />
               <span className="font-medium">Chart Visibility</span>
-              <span className="text-sm text-gray-500">({getUnit(activeMenu)})</span>
             </div>
             <div className="flex flex-wrap gap-2">
               {currentConfig?.charts.map((chart) => (
@@ -805,118 +575,73 @@ const EnergyDashboard = () => {
         {/* Chart */}
         <div className="bg-white rounded-lg shadow-sm p-6">
           <ResponsiveContainer width="100%" height={500}>
-            {viewMode === 'uncertainty' ? (
-              <ComposedChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis 
-                  dataKey="year" 
-                  type="number" 
-                  scale="linear" 
-                  domain={['dataMin', 'dataMax']}
-                />
-                <YAxis />
-                <Tooltip content={<CustomTooltip />} />
-                <Legend />
+            <ComposedChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis 
+                dataKey="year" 
+                type="number" 
+                scale="linear" 
+                domain={['dataMin', 'dataMax']}
+              />
+              <YAxis />
+              <Tooltip content={<CustomTooltip />} />
+              <Legend />
+              
+              {/* Render areas and lines for each selected chart */}
+              {currentConfig?.charts.map((chart) => {
+                if (!currentSelected[chart.id]) return null;
                 
-                {/* Render areas and lines for each selected chart */}
-                {currentConfig?.charts.map((chart) => {
-                  if (!currentSelected[chart.id]) return null;
-                  
-                  const colors = generateColors(chart.color);
-                  
-                  return (
-                    <React.Fragment key={chart.id}>
-                      {/* Area from min to max */}
-                      <Area
-                        type="monotone"
-                        dataKey={`${chart.id}_max`}
-                        stroke="none"
-                        fill={colors.lightShade}
-                        fillOpacity={0.3}
-                        stackId={chart.id}
-                      />
-                      <Area
-                        type="monotone"
-                        dataKey={`${chart.id}_min`}
-                        stroke="none"
-                        fill="white"
-                        fillOpacity={1}
-                        stackId={chart.id}
-                      />
-                      
-                      {/* Mean line */}
-                      <Line
-                        type="monotone"
-                        dataKey={`${chart.id}_mean`}
-                        stroke={colors.line}
-                        strokeWidth={2}
-                        dot={{ fill: colors.line, strokeWidth: 2, r: 4 }}
-                        name={chart.name}
-                      />
-                    </React.Fragment>
-                  );
-                })}
-              </ComposedChart>
-            ) : (
-              <BarChart data={comparisonData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="year" />
-                <YAxis />
-                <Tooltip 
-                  formatter={(value, name) => [
-                    value?.toLocaleString() || 0,
-                    currentConfig?.charts.find(c => c.id === name)?.name || name
-                  ]}
-                  labelFormatter={(label) => `Year: ${label}`}
-                />
-                <Legend 
-                  formatter={(value) => currentConfig?.charts.find(c => c.id === value)?.name || value}
-                />
+                const colors = generateColors(chart.color);
                 
-                {currentConfig?.charts.map((chart) => {
-                  if (!currentSelected[chart.id]) return null;
-                  
-                  return (
-                    <Bar
-                      key={chart.id}
-                      dataKey={chart.id}
-                      fill={chart.color}
+                return (
+                  <React.Fragment key={chart.id}>
+                    {/* Area from min to max */}
+                    <Area
+                      type="monotone"
+                      dataKey={`${chart.id}_max`}
+                      stroke="none"
+                      fill={colors.lightShade}
+                      fillOpacity={0.3}
+                      stackId={chart.id}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey={`${chart.id}_min`}
+                      stroke="none"
+                      fill="white"
+                      fillOpacity={1}
+                      stackId={chart.id}
+                    />
+                    
+                    {/* Mean line */}
+                    <Line
+                      type="monotone"
+                      dataKey={`${chart.id}_mean`}
+                      stroke={colors.line}
+                      strokeWidth={2}
+                      dot={{ fill: colors.line, strokeWidth: 2, r: 4 }}
                       name={chart.name}
                     />
-                  );
-                })}
-              </BarChart>
-            )}
+                  </React.Fragment>
+                );
+              })}
+            </ComposedChart>
           </ResponsiveContainer>
         </div>
-
-        {/* Data Table */}
-        {showDataTable && <DataTable />}
 
         {/* Legend for uncertainty bands */}
         <div className="mt-4 bg-white rounded-lg shadow-sm p-4">
           <h3 className="font-medium mb-2">Chart Legend</h3>
-          {viewMode === 'uncertainty' ? (
-            <div className="text-sm text-gray-600">
-              <div className="flex items-center gap-2 mb-1">
-                <div className="w-4 h-0.5 bg-gray-800"></div>
-                <span>Mean projection</span>
-              </div>
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-4 h-3 bg-gray-300 opacity-50"></div>
-                <span>Uncertainty range (min-max)</span>
-              </div>
-              <div className="text-xs text-gray-500 mt-2">
-                Hover over data points to see detailed min/mean/max values for each year.
-              </div>
+          <div className="text-sm text-gray-600">
+            <div className="flex items-center gap-2 mb-1">
+              <div className="w-4 h-0.5 bg-gray-800"></div>
+              <span>Mean projection</span>
             </div>
-          ) : (
-            <div className="text-sm text-gray-600">
-              <div className="text-xs text-gray-500">
-                Bar chart showing mean projections for selected years. Use the year toggles above to customize the comparison.
-              </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-3 bg-gray-300 opacity-50"></div>
+              <span>Uncertainty range (min-max)</span>
             </div>
-          )}
+          </div>
         </div>
       </div>
     </div>
