@@ -543,8 +543,8 @@ const EnergyDashboard = () => {
       name: 'Pemanfaatan Energi Final',
       hasSubmenu: true,
       submenu: [
-        { id: 'final-energy-sector', name: 'Sektor' },
-        { id: 'final-energy-source', name: 'Jenis' }
+        { id: 'final-energy-sector', name: 'Sektor (dalam juta TOE)' },
+        { id: 'final-energy-source', name: 'Jenis (dalam juta TOE)' }
       ]
     },
     { 
@@ -552,8 +552,8 @@ const EnergyDashboard = () => {
       name: 'Energi Primer', 
       hasSubmenu: true,
       submenu: [
-        { id: 'primary-energy', name: 'Penyediaan Energi Primer' },
-        { id: 'energy-intensity', name: 'Intensitas Energi Primer' }
+        { id: 'primary-energy', name: 'Penyediaan Energi Primer (dalam juta TOE)' },
+        { id: 'energy-intensity', name: 'Intensitas Energi Primer (dalam TOE)' }
       ]
     },
     { id: 'energy-per-capita', name: 'Energi per Kapita', hasSubmenu: false },
@@ -562,8 +562,8 @@ const EnergyDashboard = () => {
       name: 'EBT', 
       hasSubmenu: true,
       submenu: [
-        { id: 'bauran-energi', name: 'Bauran Energi Baru dan Energi Terbarukan' },
-        { id: 'ghg-ebt', name: 'Bauran EBT' }
+        { id: 'bauran-energi', name: 'Bauran Energi Baru dan Energi Terbarukan (dalam %)' },
+        { id: 'ghg-ebt', name: 'Bauran EBT per sumber energi (dalam %)' }
       ]
     },
     
@@ -572,7 +572,7 @@ const EnergyDashboard = () => {
       name: 'Greenhouse Gas (GHG) Reduction',
       hasSubmenu: true,
       submenu: [
-        { id: 'ghg-fossil-reduction', name: 'Pengurangan Energi Fosil' },
+        { id: 'ghg-fossil-reduction', name: 'Pengurangan Energi Fosil (dalam %)' },
         { id: 'ghg-energysector', name: 'Emisi GRK Sektor Energi (CO2e)' },
         { id: 'ghg-energysectorcapita', name: 'Emisi GRK Sektor Energi (CO2e) per Kapita' },
         { id: 'ghg-intensityemission', name: 'Intensitas emisi Energi Primer (CO2e)' }
