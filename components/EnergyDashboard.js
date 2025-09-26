@@ -553,17 +553,25 @@ const EnergyDashboard = () => {
       hasSubmenu: true,
       submenu: [
         { id: 'primary-energy', name: 'Penyediaan Energi Primer' },
-        { id: 'energy-intensity', name: 'Intensitas Energi Primer' },
-        { id: 'bauran-energi', name: 'Bauran Energi Baru dan Energi Terbarukan' }
+        { id: 'energy-intensity', name: 'Intensitas Energi Primer' }
       ]
     },
     { id: 'energy-per-capita', name: 'Energi per Kapita', hasSubmenu: false },
+    { 
+      id: 'EBT', 
+      name: 'EBT', 
+      hasSubmenu: true,
+      submenu: [
+        { id: 'bauran-energi', name: 'Bauran Energi Baru dan Energi Terbarukan' },
+        { id: 'ghg-ebt', name: 'Bauran EBT' }
+      ]
+    },
+    
     {
       id: 'ghg',
       name: 'Greenhouse Gas (GHG) Reduction',
       hasSubmenu: true,
       submenu: [
-        { id: 'ghg-ebt', name: 'Bauran EBT' },
         { id: 'ghg-fossil-reduction', name: 'Pengurangan Energi Fosil' },
         { id: 'ghg-energysector', name: 'Emisi GRK Sektor Energi (CO2e)' },
         { id: 'ghg-energysectorcapita', name: 'Emisi GRK Sektor Energi (CO2e) per Kapita' },
