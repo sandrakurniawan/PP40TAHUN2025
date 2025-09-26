@@ -660,8 +660,21 @@ const EnergyDashboard = () => {
     return null;
   };
 
-  return (
-    <div className="flex h-screen bg-gray-50">
+return (
+  <>
+    {/* Header - Fixed Top */}
+    <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-800 to-blue-900 text-white shadow-lg">
+      <div className="px-6 py-4">
+        <h1 className="text-xl md:text-2xl font-bold text-center leading-tight">
+          Target yang tercantum pada Peraturan Pemerintah Nomor 40 tahun 2025
+        </h1>
+        <h2 className="text-lg md:text-xl font-semibold text-center mt-1 text-blue-100">
+          <span className="italic">Kebijakan Energi Nasional</span> (KEN)
+        </h2>
+      </div>
+    </div>
+    
+    <div className="flex h-screen bg-gray-50 pt-24">
       {/* Sidebar */}
       <div className={`${isSidebarOpen ? 'w-64' : 'w-16'} bg-white shadow-lg transition-all duration-300 flex-shrink-0`}>
         <div className="p-4">
@@ -831,6 +844,7 @@ const EnergyDashboard = () => {
         </div>
       </div>
     </div>
+</>
   );
 };
 
