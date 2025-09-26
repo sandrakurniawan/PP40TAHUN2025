@@ -480,35 +480,35 @@ const EnergyDashboard = () => {
   // Chart configurations using static data
   const chartConfigs = {
     'final-energy-sector': {
-      title: 'Pemanfaatan Energi Final per Sektor',
+      title: 'Pemanfaatan Energi Final per Sektor (dalam TOE)',
       charts: staticData['final-energy-sector']
     },
     'final-energy-source': {
-      title: 'Pemanfaatan Energi Final per Jenis',
+      title: 'Pemanfaatan Energi Final per Jenis (dalam TOE)',
       charts: staticData['final-energy-source']
     },
     'primary-energy': {
-      title: 'Penyediaan Energi Primer',
+      title: 'Penyediaan Energi Primer(dalam juta TOE)',
       charts: staticData['primary-energy']
     },
     'energy-intensity': {
-      title: 'Intensitas Energi Primer',
+      title: 'Intensitas Energi Primer (dalam TOE)',
       charts: staticData['energy-intensity']
     },
     'bauran-energi': {
-      title: 'Bauran Energi Baru dan Energi Terbarukan',
+      title: 'Bauran EBT per sumber energi(dalam %)',
       charts: staticData['bauran-energi']
     },    
     'energy-per-capita': {
-      title: 'Pemanfaatan Energi per Kapita',
+      title: 'Pemanfaatan Energi per Kapita (dalam TOE)',
       charts: staticData['energy-per-capita']
     },
     'ghg-ebt': {
-      title: 'Bauran Energi Baru dan Energi Terbarukan (EBT)',
+      title: 'Bauran Energi Baru dan Energi Terbarukan (EBT-dalam %)',
       charts: staticData['ghg-ebt']
     },
     'ghg-fossil-reduction': {
-      title: 'Pengurangan Energi Fosil',
+      title: 'Pengurangan Energi Fosil (dalam %)',
       charts: staticData['ghg-fossil-reduction']
     },
     'ghg-intensityemission': {
@@ -572,7 +572,7 @@ const EnergyDashboard = () => {
       name: 'Greenhouse Gas (GHG) Reduction',
       hasSubmenu: true,
       submenu: [
-        { id: 'ghg-fossil-reduction', name: 'Pengurangan Energi Fosil (dalam %)' },
+        { id: 'ghg-fossil-reduction', name: 'Pengurangan Energi Fosil(dalam %)' },
         { id: 'ghg-energysector', name: 'Emisi GRK Sektor Energi (CO2e)' },
         { id: 'ghg-energysectorcapita', name: 'Emisi GRK Sektor Energi (CO2e) per Kapita' },
         { id: 'ghg-intensityemission', name: 'Intensitas emisi Energi Primer (CO2e)' }
@@ -674,7 +674,8 @@ return (
       </div>
     </div>
     
-    <div className="flex h-screen bg-gray-50 pt-24">
+    <div className="flex flex-col h-screen bg-gray-50 pt-24">
+  <div className="flex flex-1 overflow-hidden">
       {/* Sidebar */}
       <div className={`${isSidebarOpen ? 'w-64' : 'w-16'} bg-white shadow-lg transition-all duration-300 flex-shrink-0`}>
         <div className="p-4">
@@ -844,7 +845,17 @@ return (
         </div>
       </div>
     </div>
-</>
+    
+    {/* Footer - Fixed Bottom */}
+    <footer className="bg-gradient-to-r from-gray-700 to-gray-800 text-white py-3 px-6 shadow-lg">
+      <div className="text-center">
+        <p className="text-sm">
+          Dibuat dalam rangka pemenuhan tugas <span className="font-semibold">Proud To Be Back Program</span> BKD Provinsi Jawa Tengah.
+        </p>
+      </div>
+    </footer>
+  </div>
+  </>
   );
 };
 
