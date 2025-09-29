@@ -1052,8 +1052,8 @@ const currentConfig = chartConfigs[activeMenu];
       {/* Main Container with padding top for fixed header */}
       <div className="flex flex-1 overflow-hidden pt-24">
         {/* Sidebar */}
-        <div className={`${isSidebarOpen ? 'w-64' : 'w-16'} bg-white shadow-lg transition-all duration-300 flex-shrink-0`}>
-          <div className="p-4">
+        <div className={`${isSidebarOpen ? 'w-64' : 'w-16'} bg-white shadow-lg transition-all duration-300 flex-shrink-0 flex flex-col`}>
+          <div className="p-4 flex-shrink-0">
             <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               className="p-2 rounded-lg hover:bg-gray-100 w-full flex items-center justify-center"
@@ -1063,7 +1063,7 @@ const currentConfig = chartConfigs[activeMenu];
           </div>
           
           {isSidebarOpen && (
-            <nav className="mt-4">
+            <nav className="mt-4 overflow-y-auto flex-1 pb-4">
               {menuItems.map((item) => (
                 <div key={item.id}>
                   {!item.hasSubmenu ? (
@@ -1204,20 +1204,20 @@ const currentConfig = chartConfigs[activeMenu];
                     <div className="space-y-2 text-sm text-gray-600">
                       <div className="flex items-center gap-2">
                         <div className="w-6 h-0.5 bg-gray-800"></div>
-                        <span>Mean projection (solid line)</span>
+                        <span>Proyeksi rerata (garis tebal)</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="w-6 h-3 bg-gray-400 opacity-30"></div>
-                        <span>Uncertainty range (transparent shaded area)</span>
+                        <span>Rentang ketidakpastian (area berbayang transparan)</span>
                       </div>
                     </div>
                   </div>
                   <div>
                     <h4 className="text-sm font-medium text-gray-700 mb-2">Interaction</h4>
                     <div className="text-sm text-gray-600">
-                      <p>• Click chart toggles to show/hide individual series</p>
-                      <p>• Hover over chart for detailed values</p>
-                      <p>• All charts can be displayed simultaneously with transparent overlays</p>
+                      <p>• Klik tombol pada diagram untuk menampilkan/menyembunyikan masing-masing data.</p>
+                      <p>• Arahkan kursor ke grafik untuk melihat nilai yang terperinci.</p>
+                      <p>• Semua grafik dapat dilihat sekaligus dengan overlay transparan.</p>
                     </div>
                   </div>
                 </div>
