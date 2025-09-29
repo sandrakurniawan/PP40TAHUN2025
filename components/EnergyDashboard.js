@@ -1231,7 +1231,7 @@ const currentConfig = chartConfigs[activeMenu];
       <footer className="bg-gradient-to-r from-gray-700 to-gray-800 text-white py-3 px-6 shadow-lg">
         <div className="text-center">
           <p className="text-sm">
-            Dibuat dalam rangka pemenuhan tugas <span className="font-semibold">Proud To Be Back Program</span> BKD Provinsi Jawa Tengah.
+            Dibuat oleh Sandra Kurniawan dalam rangka pemenuhan tugas <span className="font-semibold">Proud To Be Back Program</span> BKD Provinsi Jawa Tengah.
           </p>
         </div>
       </footer>
