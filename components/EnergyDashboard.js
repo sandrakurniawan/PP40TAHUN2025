@@ -260,45 +260,7 @@ const GambaranUmum = () => {
             </div>
           </div>
           
-          <div className="flex items-start">
-            <div className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full mr-4 flex-shrink-0">6</div>
-            <div>
-              <h4 className="font-bold text-gray-800 mb-1">Kebijakan Pendukung Transisi Energi</h4>
-              <p className="text-gray-700 text-sm">Strategi dekarbonisasi, program konversi pembangkit fosil, pengakhiran bertahap PLTU batubara, pengembangan energi hijau dan ekonomi sirkular, serta penerapan teknologi CCUS.</p>
-            </div>
-          </div>
-          
-          <div className="flex items-start">
-            <div className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full mr-4 flex-shrink-0">7</div>
-            <div>
-              <h4 className="font-bold text-gray-800 mb-1">Pengembangan Sumber Energi Spesifik</h4>
-              <p className="text-gray-700 text-sm">Prioritas dan persyaratan pengembangan energi terbarukan (hidro, surya, angin, panas bumi, biomassa), energi baru (hidrogen hijau, amonia, nuklir/PLTN), dan energi tak terbarukan dengan teknologi rendah karbon.</p>
-            </div>
-          </div>
-          
-          <div className="flex items-start">
-            <div className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full mr-4 flex-shrink-0">8</div>
-            <div>
-              <h4 className="font-bold text-gray-800 mb-1">Sistem Cadangan Energi</h4>
-              <p className="text-gray-700 text-sm">Mekanisme pengelolaan cadangan strategis (di bawah permukaan bumi), cadangan penyangga (infrastruktur persediaan), dan cadangan operasional (BUMN/swasta) untuk keamanan pasokan energi.</p>
-            </div>
-          </div>
-          
-          <div className="flex items-start">
-            <div className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full mr-4 flex-shrink-0">9</div>
-            <div>
-              <h4 className="font-bold text-gray-800 mb-1">Instrumen Ekonomi dan Pendanaan</h4>
-              <p className="text-gray-700 text-sm">Kebijakan harga energi berkeadilan, pasar energi terregulasi, insentif fiskal/non-fiskal, pajak karbon, pembayaran berbasis kinerja NEK, subsidi tepat sasaran, dan skema pendanaan APBN/APBD/swasta.</p>
-            </div>
-          </div>
-          
-          <div className="flex items-start">
-            <div className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full mr-4 flex-shrink-0">10</div>
-            <div>
-              <h4 className="font-bold text-gray-800 mb-1">Kelembagaan dan Tata Kelola</h4>
-              <p className="text-gray-700 text-sm">Peran DEN, penguatan kapasitas Pemda, koordinasi lintas sektoral, litbang dan pengembangan SDM, kliring dan audit teknologi, kerja sama internasional dan diplomasi energi, serta mekanisme pembinaan dan pengawasan.</p>
-            </div>
-          </div>
+
         </div>
       </div>
 
@@ -376,21 +338,22 @@ const GambaranUmum = () => {
           <div>
             <h4 className="font-bold text-blue-700 mb-2">Bab VI: Kebijakan Pendukung Utama (Pasal 41-85)</h4>
             <p className="text-gray-700 text-sm mb-2">
-              Mengatur **Dekarbonisasi Sektor Energi** (Pasal 41-44) melalui transisi energi, target dekarbonisasi, dan pembangunan sarana/prasarana. Mendorong **Energi Hijau dan Ekonomi Sirkular** (Pasal 50-52). Merinci pengembangan **Sumber Energi Baru** (termasuk hidrogen, amonia, dan nuklir - Pasal 53-55) dan mewajibkan penggunaan **teknologi rendah karbon** untuk Sumber Energi Tak Terbarukan (Pasal 58). Mengatur Pendanaan Sektor Energi (Pasal 63-64), penetapan **Harga Energi** berkeadilan (Pasal 65), pemberian **Insentif dan Subsidi** (Pasal 67-70), serta penguatan **Litbangjirap** (Pasal 71-73). Kewajiban penerapan **TKDN** (Pasal 82) dan penetapan/penanggulangan **Krisis/Darurat Energi** (Pasal 85).
+              Mengatur Dekarbonisasi Sektor Energi (Pasal 41-44) melalui transisi energi, target dekarbonisasi, dan pembangunan sarana/prasarana. Mendorong Energi Hijau dan Ekonomi Sirkular (Pasal 50-52). Merinci pengembangan Sumber Energi Baru (termasuk hidrogen, amonia, dan nuklir - Pasal 53-55) dan mewajibkan penggunaan teknologi rendah karbon untuk Sumber Energi Tak Terbarukan (Pasal 58). Mengatur Pendanaan Sektor Energi (Pasal 63-64), penetapan Harga Energi berkeadilan (Pasal 65), pemberian Insentif dan Subsidi (Pasal 67-70), serta penguatan Penelitian, Pengembangan, Pengkajian, dan Penerapan Teknologi Energi,
+dan Pengembangan Sumber Daya Manusia (Pasal 71-73). Kewajiban penerapan TKDN (Pasal 82) dan penetapan/penanggulangan Krisis/Darurat Energi (Pasal 85).
             </p>
           </div>
 
           <div>
             <h4 className="font-bold text-blue-700 mb-2">Bab VII: RUEN dan RUED (Pasal 86-88)</h4>
             <p className="text-gray-700 text-sm mb-2">
-              Mewajibkan penyusunan **Rencana Umum Energi Nasional (RUEN)** oleh Pemerintah Pusat (periode 10 tahun, ditinjau 5 tahun) yang memuat strategi dekarbonisasi dan kebutuhan energi per 7 region. **Rencana Umum Energi Daerah (RUED)** disusun oleh Pemerintah Provinsi mengacu pada RUEN.
+              Mewajibkan penyusunan Rencana Umum Energi Nasional (RUEN) oleh Pemerintah Pusat (periode 10 tahun, ditinjau 5 tahun) yang memuat strategi dekarbonisasi dan kebutuhan energi per 7 region. Rencana Umum Energi Daerah (RUED) disusun oleh Pemerintah Provinsi mengacu pada RUEN.
             </p>
           </div>
 
           <div>
             <h4 className="font-bold text-blue-700 mb-2">Bab VIII: Pembinaan dan Pengawasan & Ketentuan Penutup (Pasal 89-93)</h4>
             <p className="text-gray-700 text-sm mb-2">
-              **Dewan Energi Nasional (DEN)** bertugas melakukan pembinaan dan pengawasan kebijakan energi lintas sektoral (Pasal 89). Pemerintah Pusat/Daerah melakukan pembinaan dan pengawasan pengusahaan energi (Pasal 90). PP ini **mencabut dan menyatakan tidak berlaku** Perpres No. 79 Tahun 2014, sementara peraturan pelaksanaannya tetap berlaku sepanjang tidak bertentangan (Pasal 91-92).
+              Dewan Energi Nasional (DEN) bertugas melakukan pembinaan dan pengawasan kebijakan energi lintas sektoral (Pasal 89). Pemerintah Pusat/Daerah melakukan pembinaan dan pengawasan pengusahaan energi (Pasal 90). PP ini mencabut dan menyatakan tidak berlaku Perpres No. 79 Tahun 2014, sementara peraturan pelaksanaannya tetap berlaku sepanjang tidak bertentangan (Pasal 91-92).
             </p>
           </div>
 
