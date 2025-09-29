@@ -898,7 +898,7 @@ const EnergyDashboard = () => {
     }
   ];
 
-  const currentConfig = chartConfigs[activeMenu];
+const currentConfig = chartConfigs[activeMenu];
   const currentSelected = selectedCharts[activeMenu] || {};
 
   // Prepare chart data with proper structure for transparent overlapping areas
@@ -978,204 +978,207 @@ const EnergyDashboard = () => {
     return null;
   };
 
-return (
-  <>
-    {/* Header - Fixed Top */}
-    <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-800 to-blue-900 text-white shadow-lg">
-      <div className="px-6 py-4">
-        <h1 className="text-xl md:text-2xl font-bold text-center leading-tight">
-          Target yang tercantum pada Peraturan Pemerintah Nomor 40 tahun 2025
-        </h1>
-        <h2 className="text-lg md:text-xl font-semibold text-center mt-1 text-blue-100">
-          <span className="italic">Kebijakan Energi Nasional</span> (KEN)
-        </h2>
-      </div>
-    </div>
-    
-    <div className="flex flex-col h-screen bg-gray-50 pt-24">
-  <div className="flex flex-1 overflow-hidden">
-      {/* Sidebar */}
-      <div className={`${isSidebarOpen ? 'w-64' : 'w-16'} bg-white shadow-lg transition-all duration-300 flex-shrink-0`}>
-        <div className="p-4">
-          <button
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="p-2 rounded-lg hover:bg-gray-100 w-full flex items-center justify-center"
-          >
-            {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+  return (
+    <div className="flex flex-col h-screen bg-gray-50">
+      {/* Header - Fixed Top */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-800 to-blue-900 text-white shadow-lg">
+        <div className="px-6 py-4">
+          <h1 className="text-xl md:text-2xl font-bold text-center leading-tight">
+            Target yang tercantum pada Peraturan Pemerintah Nomor 40 tahun 2025
+          </h1>
+          <h2 className="text-lg md:text-xl font-semibold text-center mt-1 text-blue-100">
+            <span className="italic">Kebijakan Energi Nasional</span> (KEN)
+          </h2>
         </div>
-        
-        {isSidebarOpen && (
-          <nav className="mt-4">
-            {menuItems.map((item) => (
-              <div key={item.id}>
-                {!item.hasSubmenu ? (
-                  <button
-                    onClick={() => setActiveMenu(item.id)}
-                    className={`w-full text-left px-4 py-3 hover:bg-gray-100 transition-colors ${
-                      activeMenu === item.id ? 'bg-blue-50 border-r-2 border-blue-500' : ''
-                    }`}
-                  >
-                    {item.name}
-                  </button>
-                ) : (
-                  <div className="px-4 py-2">
-                    <div className="flex items-center text-gray-700 font-medium">
+      </div>
+      
+      {/* Main Container with padding top for fixed header */}
+      <div className="flex flex-1 overflow-hidden pt-24">
+        {/* Sidebar */}
+        <div className={`${isSidebarOpen ? 'w-64' : 'w-16'} bg-white shadow-lg transition-all duration-300 flex-shrink-0`}>
+          <div className="p-4">
+            <button
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="p-2 rounded-lg hover:bg-gray-100 w-full flex items-center justify-center"
+            >
+              {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+          
+          {isSidebarOpen && (
+            <nav className="mt-4">
+              {menuItems.map((item) => (
+                <div key={item.id}>
+                  {!item.hasSubmenu ? (
+                    <button
+                      onClick={() => setActiveMenu(item.id)}
+                      className={`w-full text-left px-4 py-3 hover:bg-gray-100 transition-colors ${
+                        activeMenu === item.id ? 'bg-blue-50 border-r-2 border-blue-500' : ''
+                      }`}
+                    >
                       {item.name}
-                      <ChevronDown size={16} className="ml-2" />
+                    </button>
+                  ) : (
+                    <div className="px-4 py-2">
+                      <div className="flex items-center text-gray-700 font-medium">
+                        {item.name}
+                        <ChevronDown size={16} className="ml-2" />
+                      </div>
+                      <div className="ml-4 mt-2">
+                        {item.submenu.map((subItem) => (
+                          <button
+                            key={subItem.id}
+                            onClick={() => setActiveMenu(subItem.id)}
+                            className={`w-full text-left px-2 py-2 hover:bg-gray-100 rounded transition-colors ${
+                              activeMenu === subItem.id ? 'bg-blue-50 text-blue-600' : ''
+                            }`}
+                          >
+                            {subItem.name}
+                          </button>
+                        ))}
+                      </div>
                     </div>
-                    <div className="ml-4 mt-2">
-                      {item.submenu.map((subItem) => (
-                        <button
-                          key={subItem.id}
-                          onClick={() => setActiveMenu(subItem.id)}
-                          className={`w-full text-left px-2 py-2 hover:bg-gray-100 rounded transition-colors ${
-                            activeMenu === subItem.id ? 'bg-blue-50 text-blue-600' : ''
-                          }`}
-                        >
-                          {subItem.name}
-                        </button>
-                      ))}
+                  )}
+                </div>
+              ))}
+            </nav>
+          )}
+        </div>
+
+        {/* Main Content */}
+        <div className="flex-1 p-6 overflow-auto">
+          {activeMenu === 'gambaran-umum' ? (
+            <GambaranUmum />
+          ) : (
+            <>
+              <div className="mb-6">
+                <h1 className="text-3xl font-bold text-gray-800 mb-2">
+                  {currentConfig?.title}
+                </h1>
+                
+                {/* Chart toggles */}
+                <div className="bg-white p-4 rounded-lg shadow-sm mb-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Filter size={20} />
+                    <span className="font-medium">Chart Visibility</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {currentConfig?.charts.map((chart) => (
+                      <button
+                        key={chart.id}
+                        onClick={() => toggleChartVisibility(chart.id)}
+                        className={`px-3 py-1 rounded-full text-sm transition-colors ${
+                          currentSelected[chart.id]
+                            ? 'text-white'
+                            : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                        }`}
+                        style={{
+                          backgroundColor: currentSelected[chart.id] ? chart.color : undefined
+                        }}
+                      >
+                        {chart.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Chart */}
+              <div className="bg-white rounded-lg shadow-sm p-6">
+                <ResponsiveContainer width="100%" height={500}>
+                  <ComposedChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis 
+                      dataKey="year" 
+                      type="number" 
+                      scale="linear" 
+                      domain={['dataMin', 'dataMax']}
+                    />
+                    <YAxis />
+                    <Tooltip content={<CustomTooltip />} />
+                    <Legend />
+                    
+                    {/* Render all areas first (background layer) */}
+                    {currentConfig?.charts.map((chart) => {
+                      if (!currentSelected[chart.id]) return null;
+                      
+                      const colors = generateColors(chart.color);
+                      
+                      return (
+                        <Area
+                          key={`area-${chart.id}`}
+                          type="monotone"
+                          dataKey={`${chart.id}_max`}
+                          stroke="none"
+                          fill={colors.areaFill}
+                          fillOpacity={1}
+                        />
+                      );
+                    })}
+                    
+                    {/* Then render all mean lines (in front of areas) */}
+                    {currentConfig?.charts.map((chart) => {
+                      if (!currentSelected[chart.id]) return null;
+                      
+                      const colors = generateColors(chart.color);
+                      
+                      return (
+                        <Line
+                          key={`line-${chart.id}`}
+                          type="monotone"
+                          dataKey={`${chart.id}_mean`}
+                          stroke={colors.line}
+                          strokeWidth={3}
+                          dot={{ fill: colors.line, strokeWidth: 2, r: 5 }}
+                          name={chart.name}
+                        />
+                      );
+                    })}
+                  </ComposedChart>
+                </ResponsiveContainer>
+              </div>
+
+              {/* Enhanced Legend */}
+              <div className="mt-4 bg-white rounded-lg shadow-sm p-4">
+                <h3 className="font-medium mb-3">Chart Legend</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-700 mb-2">Visual Elements</h4>
+                    <div className="space-y-2 text-sm text-gray-600">
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-0.5 bg-gray-800"></div>
+                        <span>Mean projection (solid line)</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-3 bg-gray-400 opacity-30"></div>
+                        <span>Uncertainty range (transparent shaded area)</span>
+                      </div>
                     </div>
                   </div>
-                )}
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-700 mb-2">Interaction</h4>
+                    <div className="text-sm text-gray-600">
+                      <p>• Click chart toggles to show/hide individual series</p>
+                      <p>• Hover over chart for detailed values</p>
+                      <p>• All charts can be displayed simultaneously with transparent overlays</p>
+                    </div>
+                  </div>
+                </div>
               </div>
-            ))}
-          </nav>
-        )}
-      </div>
-
-{/* Main Content */}
-<div className="flex-1 p-6 overflow-auto">
-  {activeMenu === 'gambaran-umum' ? (
-    <GambaranUmum />
-  ) : (
-    <>
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">
-          {currentConfig?.title}
-        </h1>
-        
-        {/* Chart toggles */}
-        <div className="bg-white p-4 rounded-lg shadow-sm mb-4">
-          <div className="flex items-center gap-2 mb-3">
-            <Filter size={20} />
-            <span className="font-medium">Chart Visibility</span>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {currentConfig?.charts.map((chart) => (
-              <button
-                key={chart.id}
-                onClick={() => toggleChartVisibility(chart.id)}
-                className={`px-3 py-1 rounded-full text-sm transition-colors ${
-                  currentSelected[chart.id]
-                    ? 'text-white'
-                    : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
-                }`}
-                style={{
-                  backgroundColor: currentSelected[chart.id] ? chart.color : undefined
-                }}
-              >
-                {chart.name}
-              </button>
-            ))}
-          </div>
+            </>
+          )}
         </div>
       </div>
 
-      {/* Chart */}
-      <div className="bg-white rounded-lg shadow-sm p-6">
-        <ResponsiveContainer width="100%" height={500}>
-          <ComposedChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis 
-              dataKey="year" 
-              type="number" 
-              scale="linear" 
-              domain={['dataMin', 'dataMax']}
-            />
-            <YAxis />
-            <Tooltip content={<CustomTooltip />} />
-            <Legend />
-            
-            {currentConfig?.charts.map((chart) => {
-              if (!currentSelected[chart.id]) return null;
-              
-              const colors = generateColors(chart.color);
-              
-              return (
-                <Area
-                  key={`area-${chart.id}`}
-                  type="monotone"
-                  dataKey={`${chart.id}_max`}
-                    stroke="none"
-                    fill={colors.areaFill}
-                    fillOpacity={1}
-                  />
-                );
-              })}
-              
-              {/* Then render all mean lines (in front of areas) */}
-        {currentConfig?.charts.map((chart) => {
-          if (!currentSelected[chart.id]) return null;
-          
-          const colors = generateColors(chart.color);
-          
-          return (
-            <Line
-              key={`line-${chart.id}`}
-              type="monotone"
-              dataKey={`${chart.id}_mean`}
-              stroke={colors.line}
-              strokeWidth={3}
-              dot={{ fill: colors.line, strokeWidth: 2, r: 5 }}
-              name={chart.name}
-            />
-          );
-        })}
-      </ComposedChart>
-    </ResponsiveContainer>
-  </div>
-
-  {/* Enhanced Legend */}
-  <div className="mt-4 bg-white rounded-lg shadow-sm p-4">
-    <h3 className="font-medium mb-3">Chart Legend</h3>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div>
-        <h4 className="text-sm font-medium text-gray-700 mb-2">Visual Elements</h4>
-        <div className="space-y-2 text-sm text-gray-600">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-0.5 bg-gray-800"></div>
-            <span>Mean projection (solid line)</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-3 bg-gray-400 opacity-30"></div>
-            <span>Uncertainty range (transparent shaded area)</span>
-          </div>
+      {/* Footer - Fixed Bottom */}
+      <footer className="bg-gradient-to-r from-gray-700 to-gray-800 text-white py-3 px-6 shadow-lg">
+        <div className="text-center">
+          <p className="text-sm">
+            Dibuat dalam rangka pemenuhan tugas <span className="font-semibold">Proud To Be Back Program</span> BKD Provinsi Jawa Tengah.
+          </p>
         </div>
-      </div>
-      <div>
-        <h4 className="text-sm font-medium text-gray-700 mb-2">Interaction</h4>
-        <div className="text-sm text-gray-600">
-          <p>• Click chart toggles to show/hide individual series</p>
-          <p>• Hover over chart for detailed values</p>
-          <p>• All charts can be displayed simultaneously with transparent overlays</p>
-        </div>
-      </div>
+      </footer>
     </div>
-  </div>
-</>
-    
-    {/* Footer - Fixed Bottom */}
-    <footer className="bg-gradient-to-r from-gray-700 to-gray-800 text-white py-3 px-6 shadow-lg">
-      <div className="text-center">
-        <p className="text-sm">
-          Dibuat dalam rangka pemenuhan tugas <span className="font-semibold">Proud To Be Back Program</span> BKD Provinsi Jawa Tengah.
-        </p>
-      </div>
-    </footer>
-  </div>
-  </>
   );
 };
 
