@@ -1056,17 +1056,17 @@ const currentConfig = chartConfigs[activeMenu];
       <img 
         src="/logojateng.png" 
         alt="Logo Jawa Tengah" 
-        className="h-16 w-auto object-contain"
+        className="h-20 w-auto object-contain"
       />
     </div>
     
     {/* Title di Tengah */}
     <div className="flex-1 text-center mx-4">
       <h1 className="text-xl md:text-2xl font-bold leading-tight">
-        Target yang tercantum pada Peraturan Pemerintah Nomor 40 tahun 2025
+        Peraturan Pemerintah Nomor 40 tahun 2025
       </h1>
       <h2 className="text-lg md:text-xl font-semibold mt-1 text-blue-100">
-        <span className="italic">Kebijakan Energi Nasional</span> (KEN)
+        <span className="italic">tentang Kebijakan Energi Nasional</span> (KEN)
       </h2>
     </div>
     
@@ -1075,7 +1075,7 @@ const currentConfig = chartConfigs[activeMenu];
       <img 
         src="/logomain.png" 
         alt="Logo Main" 
-        className="h-16 w-auto object-contain"
+        className="h-12 w-auto object-contain"
       />
     </div>
   </div>
