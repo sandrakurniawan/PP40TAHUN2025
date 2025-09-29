@@ -1048,7 +1048,38 @@ const currentConfig = chartConfigs[activeMenu];
           </h2>
         </div>
       </div>
-      
+{/* Header - Fixed Top */}
+<div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-800 to-blue-900 text-white shadow-lg">
+  <div className="px-6 py-4 flex items-center justify-between">
+    {/* Logo Kiri - Jawa Tengah */}
+    <div className="flex-shrink-0">
+      <img 
+        src="/logojateng.png" 
+        alt="Logo Jawa Tengah" 
+        className="h-16 w-auto object-contain"
+      />
+    </div>
+    
+    {/* Title di Tengah */}
+    <div className="flex-1 text-center mx-4">
+      <h1 className="text-xl md:text-2xl font-bold leading-tight">
+        Target yang tercantum pada Peraturan Pemerintah Nomor 40 tahun 2025
+      </h1>
+      <h2 className="text-lg md:text-xl font-semibold mt-1 text-blue-100">
+        <span className="italic">Kebijakan Energi Nasional</span> (KEN)
+      </h2>
+    </div>
+    
+    {/* Logo Kanan - Main Logo */}
+    <div className="flex-shrink-0">
+      <img 
+        src="/logomain.png" 
+        alt="Logo Main" 
+        className="h-16 w-auto object-contain"
+      />
+    </div>
+  </div>
+</div>      
       {/* Main Container with padding top for fixed header */}
       <div className="flex flex-1 overflow-hidden pt-24">
         {/* Sidebar */}
