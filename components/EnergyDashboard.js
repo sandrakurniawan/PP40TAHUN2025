@@ -240,7 +240,7 @@ const GambaranUmum = () => {
             <div className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full mr-4 flex-shrink-0">3</div>
             <div>
               <h4 className="font-bold text-gray-800 mb-1">Energi per Kapita</h4>
-              <p className="text-gray-700 text-sm">Indikator kesejahteraan energi melalui konsumsi energi final per kapita dan penyediaan energi primer per kapita dalam satuan TOE dan GJ.</p>
+              <p className="text-gray-700 text-sm">Indikator kesejahteraan energi melalui konsumsi energi final per kapita dan penyediaan energi primer per kapita dalam satuan TOE.</p>
             </div>
           </div>
           
