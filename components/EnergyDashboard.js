@@ -60,11 +60,12 @@ const GambaranUmum = () => {
             Implementasi KEN melibatkan berbagai pihak dengan peran masing-masing:
           </p>
           <ul className="text-gray-700 space-y-2">
-            <li>• <strong>Pemerintah Pusat:</strong> Perumus kebijakan, koordinator pelaksanaan, dan pengawas implementasi KEN</li>
-            <li>• <strong>Pemerintah Daerah:</strong> Pelaksana kebijakan di tingkat regional, penyusun rencana energi daerah yang selaras dengan KEN</li>
-            <li>• <strong>BUMN/BUMD:</strong> Pelaksana utama pengusahaan energi dan penyedia infrastruktur energi</li>
-            <li>• <strong>Sektor Swasta:</strong> Investor dan operator dalam pengembangan proyek energi, khususnya EBT</li>
-            <li>• <strong>Masyarakat:</strong> Konsumen energi yang didorong untuk berpartisipasi dalam konservasi dan efisiensi energi</li>
+            <li>• <strong>Pemerintah Pusat:</strong> Perumus kebijakan, penyusun RUEN, penetap target dekarbonisasi, koordinator diplomasi energi internasional, pembina dan pengawas lintas sektoral</li>
+            <li>• <strong>Pemerintah Daerah:</strong> Penyusun RUED, pelaksana pembangunan sarana/prasarana energi berbasis kewilayahan, identifikasi dan inventarisasi potensi energi setempat, pembina dan pengawas implementasi di daerah</li>
+            <li>• <strong>Dewan Energi Nasional:</strong> Pembina penyusunan RUEN/RUED, pengawas pelaksanaan kebijakan lintas sektoral, penetap langkah penanggulangan krisis/darurat energi</li>
+            <li>• <strong>BUMN/BUMD:</strong> Pengelola cadangan operasional, pelaksana pengusahaan energi, penyedia infrastruktur dan elektrifikasi</li>
+            <li>• <strong>Sektor Swasta:</strong> Investor dan operator pengembangan EBT, wajib mengacu target dekarbonisasi dalam rencana usaha, pelaksana kewajiban TKDN dan konservasi energi</li>
+            <li>• <strong>Masyarakat:</strong> Konsumen energi yang wajib melakukan konservasi, pelaksana efisiensi energi, dan berpartisipasi dalam penanggulangan krisis energi</li>
           </ul>
         </div>
 
@@ -97,11 +98,11 @@ const GambaranUmum = () => {
             Kebijakan ini berlaku untuk seluruh wilayah Negara Kesatuan Republik Indonesia dengan pendekatan:
           </p>
           <ul className="text-gray-700 space-y-2">
-            <li>• <strong>Nasional:</strong> Menetapkan target dan arah kebijakan energi untuk Indonesia secara keseluruhan</li>
-            <li>• <strong>Regional:</strong> Mendorong interkoneksi sistem energi antar daerah dan pulau untuk efisiensi dan keandalan</li>
-            <li>• <strong>Lokal:</strong> Mengutamakan pemanfaatan sumber energi setempat dan pemerataan akses energi</li>
-            <li>• <strong>Kawasan Perbatasan:</strong> Kerja sama pengembangan energi dengan negara tetangga untuk ketahanan energi kawasan</li>
-            <li>• <strong>Lintas Negara:</strong> Membuka kemungkinan ekspor-impor energi termasuk listrik untuk keamanan pasokan jangka panjang</li>
+            <li>• <strong>Nasional:</strong> RUEN disusun dengan memuat kebutuhan dan rencana penyediaan energi nasional termasuk strategi dekarbonisasi</li>
+            <li>• <strong>7 Region Strategis:</strong> Rencana penyediaan energi untuk Sumatera, Jawa-Bali, Kalimantan, Sulawesi, Nusa Tenggara, Maluku, dan Papua beserta indikatornya</li>
+            <li>• <strong>Provinsi:</strong> RUED disusun oleh Pemerintah Daerah Provinsi mengacu pada RUEN dengan memperhatikan kondisi dan potensi energi setempat</li>
+            <li>• <strong>Berbasis Kewilayahan:</strong> Pembangunan sarana/prasarana energi dengan pendekatan holistik-tematik, integratif, dan spasial</li>
+            <li>• <strong>Kawasan Perbatasan & Internasional:</strong> Kerja sama pengembangan energi lintas negara, diplomasi energi internasional, dan ekspor-impor energi untuk ketahanan regional</li>
           </ul>
         </div>
 
@@ -115,12 +116,14 @@ const GambaranUmum = () => {
             Pencapaian target KEN dilaksanakan melalui strategi komprehensif:
           </p>
           <ul className="text-gray-700 space-y-2">
-            <li>• <strong>Transisi Bertahap:</strong> Pengembangan energi rendah karbon secara rasional, terukur, dan berkelanjutan</li>
-            <li>• <strong>Prioritas EBT:</strong> Memaksimalkan pemanfaatan energi terbarukan dan meminimalkan energi fosil</li>
-            <li>• <strong>Teknologi Rendah Karbon:</strong> Penerapan CCUS, carbon capture, dan teknologi efisiensi energi</li>
-            <li>• <strong>Konservasi Energi:</strong> Wajib dilaksanakan oleh semua pemangku kepentingan dengan standar efisiensi energi</li>
-            <li>• <strong>Cadangan Energi:</strong> Penyediaan cadangan strategis, cadangan penyangga, dan cadangan operasional</li>
-            <li>• <strong>Instrumen Ekonomi:</strong> Insentif, pajak karbon, dan pembayaran berbasis kinerja penurunan emisi</li>
+            <li>• <strong>Transisi Energi Bertahap:</strong> Konversi pembangkit fosil ke EBT, pengakhiran bertahap PLTU batubara, pelarangan pembangkit batubara baru, pemanfaatan teknologi rendah karbon dan CCUS</li>
+            <li>• <strong>Prioritas EBT:</strong> Maksimalisasi pengembangan energi terbarukan, inventarisasi sumber daya, penetapan rencana pengembangan, pengalokasian lahan, dan pemberian kemudahan</li>
+            <li>• <strong>Pengembangan Energi Baru:</strong> Hidrogen hijau dari EBT, pengembangan nuklir (PLTN) dengan standar keselamatan ketat, amonia sebagai bahan bakar rendah karbon</li>
+            <li>• <strong>Konservasi & Efisiensi:</strong> Wajib bagi semua pihak, standar kinerja energi minimum, audit energi, insentif/disinsentif berbasis kinerja konservasi</li>
+            <li>• <strong>Cadangan Energi 3 Lapis:</strong> Cadangan strategis (di bawah permukaan bumi), cadangan penyangga (persediaan infrastruktur), cadangan operasional (BUMN dan swasta)</li>
+            <li>• <strong>Instrumen Ekonomi:</strong> Harga energi berkeadilan, pasar energi terregulasi, insentif fiskal/non-fiskal, pajak karbon bertahap, pembayaran berbasis kinerja penurunan emisi (NEK)</li>
+            <li>• <strong>Pendanaan Terintegrasi:</strong> APBN/APBD, investasi swasta, dukungan lembaga keuangan, subsidi tepat sasaran yang dikurangi bertahap, pembiayaan litbang dan SDM</li>
+            <li>• <strong>Penguatan Kelembagaan:</strong> Koordinasi lintas sektoral, peningkatan kapasitas Pemda, sinergi dengan BI dan OJK, kerja sama internasional dan diplomasi energi</li>
           </ul>
         </div>
       </div>
@@ -136,44 +139,72 @@ const GambaranUmum = () => {
         
         <div className="grid md:grid-cols-2 gap-4">
           <div className="bg-white p-4 rounded-lg shadow-sm">
-            <h4 className="font-bold text-amber-700 mb-2">1. Acuan Perencanaan Energi Daerah</h4>
+            <h4 className="font-bold text-amber-700 mb-2">1. Acuan Penyusunan RUED</h4>
             <p className="text-sm text-gray-700">
-              Dashboard menyediakan visualisasi target nasional yang menjadi rujukan dalam menyusun Rencana Umum Energi Daerah (RUED) dan Rencana Pembangunan Jangka Menengah Daerah (RPJMD) sesuai amanat Pasal 4 PP No. 40/2025.
+              Dashboard menyediakan visualisasi target RUEN yang menjadi rujukan wajib dalam menyusun Rencana Umum Energi Daerah (RUED) dan RPJMD sesuai Pasal 86-87. RUED harus selaras dengan RUEN dan memperhatikan kondisi strategis daerah.
             </p>
           </div>
           
           <div className="bg-white p-4 rounded-lg shadow-sm">
-            <h4 className="font-bold text-amber-700 mb-2">2. Monitoring dan Evaluasi Kinerja</h4>
+            <h4 className="font-bold text-amber-700 mb-2">2. Identifikasi Potensi Energi Lokal</h4>
             <p className="text-sm text-gray-700">
-              Memudahkan pemantauan capaian target energi daerah terhadap target nasional secara berkala, mendukung fungsi pembinaan dan pengawasan sebagaimana Pasal 36 PP No. 40/2025.
+              Membantu Pemda melaksanakan kewajiban identifikasi dan inventarisasi sumber energi setempat (Pasal 41, 53, 56), termasuk EBT, energi baru, dan energi tak terbarukan untuk diintegrasikan dalam RUED.
             </p>
           </div>
           
           <div className="bg-white p-4 rounded-lg shadow-sm">
-            <h4 className="font-bold text-amber-700 mb-2">3. Pendukung Pengambilan Keputusan</h4>
+            <h4 className="font-bold text-amber-700 mb-2">3. Perencanaan Infrastruktur Energi</h4>
             <p className="text-sm text-gray-700">
-              Menyajikan data komparatif antar periode dan sektor untuk membantu Kepala Daerah dan SKPD terkait dalam merumuskan kebijakan energi daerah yang tepat sasaran dan berbasis data.
+              Mendukung Pemda dalam menyusun rencana pembangunan sarana/prasarana energi berbasis kewilayahan (holistik-tematik, integratif, spasial) dan pengalokasian lahan untuk proyek energi sesuai Pasal 41 dan 45.
             </p>
           </div>
           
           <div className="bg-white p-4 rounded-lg shadow-sm">
-            <h4 className="font-bold text-amber-700 mb-2">4. Transparansi dan Akuntabilitas Publik</h4>
+            <h4 className="font-bold text-amber-700 mb-2">4. Penetapan Target Dekarbonisasi Daerah</h4>
             <p className="text-sm text-gray-700">
-              Mewujudkan prinsip transparansi dalam pengusahaan energi (Pasal 32) dengan menyediakan informasi yang mudah diakses oleh seluruh pemangku kepentingan dan masyarakat.
+              Memfasilitasi Pemda dalam menetapkan target dekarbonisasi sektor energi daerah (bauran energi primer, intensitas emisi, penurunan GRK) yang harus tercantum dalam RUED sebagaimana Pasal 44.
             </p>
           </div>
           
           <div className="bg-white p-4 rounded-lg shadow-sm">
-            <h4 className="font-bold text-amber-700 mb-2">5. Identifikasi Peluang Investasi</h4>
+            <h4 className="font-bold text-amber-700 mb-2">5. Monitoring & Evaluasi Berkala</h4>
             <p className="text-sm text-gray-700">
-              Membantu mengidentifikasi sektor dan jenis energi yang memerlukan pengembangan prioritas, mendukung upaya menarik investasi EBT dan infrastruktur energi di daerah.
+              Memudahkan pemantauan capaian target energi daerah terhadap RUEN secara berkala (periode 10 tahun dengan tinjauan 5 tahun), mendukung fungsi pembinaan dan pengawasan Pasal 89-90.
             </p>
           </div>
           
           <div className="bg-white p-4 rounded-lg shadow-sm">
-            <h4 className="font-bold text-amber-700 mb-2">6. Koordinasi Lintas Sektor</h4>
+            <h4 className="font-bold text-amber-700 mb-2">6. Koordinasi dengan DEN dan Pusat</h4>
             <p className="text-sm text-gray-700">
-              Menyediakan basis data bersama untuk koordinasi antara Dinas Energi, Bappeda, Dinas Lingkungan Hidup, dan SKPD lainnya dalam implementasi program energi terintegrasi.
+              Menyediakan basis data untuk koordinasi dengan Dewan Energi Nasional (DEN) yang melakukan pembinaan penyusunan RUED dan memerlukan data/informasi dari Pemda sesuai Pasal 89.
+            </p>
+          </div>
+          
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <h4 className="font-bold text-amber-700 mb-2">7. Pendukung Pengambilan Keputusan</h4>
+            <p className="text-sm text-gray-700">
+              Menyajikan data komparatif untuk membantu Kepala Daerah dan SKPD terkait dalam merumuskan kebijakan insentif/disinsentif energi, subsidi tepat sasaran, dan program elektrifikasi daerah.
+            </p>
+          </div>
+          
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <h4 className="font-bold text-amber-700 mb-2">8. Transparansi dan Akuntabilitas</h4>
+            <p className="text-sm text-gray-700">
+              Mewujudkan prinsip transparansi dalam pengusahaan energi (Pasal 32) dan akuntabilitas kelembagaan (Pasal 78) dengan informasi yang mudah diakses pemangku kepentingan dan masyarakat.
+            </p>
+          </div>
+          
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <h4 className="font-bold text-amber-700 mb-2">9. Identifikasi Peluang Investasi</h4>
+            <p className="text-sm text-gray-700">
+              Membantu mengidentifikasi sektor prioritas untuk menarik investasi EBT, meningkatkan kerja sama pendanaan/investasi, dan memberikan kemudahan pengembangan energi sesuai Pasal 41, 53, 56.
+            </p>
+          </div>
+          
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <h4 className="font-bold text-amber-700 mb-2">10. Penguatan Kapasitas Kelembagaan</h4>
+            <p className="text-sm text-gray-700">
+              Mendukung penguatan kapasitas organisasi bidang energi di tingkat provinsi dan peningkatan peran Pemda dalam implementasi kebijakan energi sebagaimana amanat Pasal 78.
             </p>
           </div>
         </div>
@@ -228,6 +259,46 @@ const GambaranUmum = () => {
               <p className="text-gray-700 text-sm">Lintasan penurunan emisi sektor energi, target pengurangan energi fosil, emisi per kapita, dan intensitas emisi energi primer menuju NZE 2060.</p>
             </div>
           </div>
+          
+          <div className="flex items-start">
+            <div className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full mr-4 flex-shrink-0">6</div>
+            <div>
+              <h4 className="font-bold text-gray-800 mb-1">Kebijakan Pendukung Transisi Energi</h4>
+              <p className="text-gray-700 text-sm">Strategi dekarbonisasi, program konversi pembangkit fosil, pengakhiran bertahap PLTU batubara, pengembangan energi hijau dan ekonomi sirkular, serta penerapan teknologi CCUS.</p>
+            </div>
+          </div>
+          
+          <div className="flex items-start">
+            <div className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full mr-4 flex-shrink-0">7</div>
+            <div>
+              <h4 className="font-bold text-gray-800 mb-1">Pengembangan Sumber Energi Spesifik</h4>
+              <p className="text-gray-700 text-sm">Prioritas dan persyaratan pengembangan energi terbarukan (hidro, surya, angin, panas bumi, biomassa), energi baru (hidrogen hijau, amonia, nuklir/PLTN), dan energi tak terbarukan dengan teknologi rendah karbon.</p>
+            </div>
+          </div>
+          
+          <div className="flex items-start">
+            <div className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full mr-4 flex-shrink-0">8</div>
+            <div>
+              <h4 className="font-bold text-gray-800 mb-1">Sistem Cadangan Energi</h4>
+              <p className="text-gray-700 text-sm">Mekanisme pengelolaan cadangan strategis (di bawah permukaan bumi), cadangan penyangga (infrastruktur persediaan), dan cadangan operasional (BUMN/swasta) untuk keamanan pasokan energi.</p>
+            </div>
+          </div>
+          
+          <div className="flex items-start">
+            <div className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full mr-4 flex-shrink-0">9</div>
+            <div>
+              <h4 className="font-bold text-gray-800 mb-1">Instrumen Ekonomi dan Pendanaan</h4>
+              <p className="text-gray-700 text-sm">Kebijakan harga energi berkeadilan, pasar energi terregulasi, insentif fiskal/non-fiskal, pajak karbon, pembayaran berbasis kinerja NEK, subsidi tepat sasaran, dan skema pendanaan APBN/APBD/swasta.</p>
+            </div>
+          </div>
+          
+          <div className="flex items-start">
+            <div className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full mr-4 flex-shrink-0">10</div>
+            <div>
+              <h4 className="font-bold text-gray-800 mb-1">Kelembagaan dan Tata Kelola</h4>
+              <p className="text-gray-700 text-sm">Peran DEN, penguatan kapasitas Pemda, koordinasi lintas sektoral, litbang dan pengembangan SDM, kliring dan audit teknologi, kerja sama internasional dan diplomasi energi, serta mekanisme pembinaan dan pengawasan.</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -238,21 +309,21 @@ const GambaranUmum = () => {
         </h3>
         <div className="grid md:grid-cols-3 gap-4">
           <div className="bg-white p-4 rounded-lg shadow-sm">
-            <h4 className="font-bold text-green-700 mb-2">📊 Visualisasi Interaktif</h4>
+            <h4 className="font-bold text-green-700 mb-2">Visualisasi Interaktif</h4>
             <p className="text-sm text-gray-700">
               Grafik dinamis dengan rentang proyeksi (minimum, rata-rata, maksimum) untuk memahami ketidakpastian dan skenario perencanaan.
             </p>
           </div>
           
           <div className="bg-white p-4 rounded-lg shadow-sm">
-            <h4 className="font-bold text-green-700 mb-2">🔍 Perbandingan Multi-Dimensi</h4>
+            <h4 className="font-bold text-green-700 mb-2">Perbandingan Multi-Dimensi</h4>
             <p className="text-sm text-gray-700">
               Bandingkan target antar periode waktu (2030 vs 2060), antar sektor, atau antar jenis energi untuk analisis mendalam.
             </p>
           </div>
           
           <div className="bg-white p-4 rounded-lg shadow-sm">
-            <h4 className="font-bold text-green-700 mb-2">⚙️ Kontrol Tampilan Fleksibel</h4>
+            <h4 className="font-bold text-green-700 mb-2">Kontrol Tampilan Fleksibel</h4>
             <p className="text-sm text-gray-700">
               Filter dan toggle untuk menyesuaikan tampilan data sesuai kebutuhan analisis spesifik Anda.
             </p>
@@ -301,6 +372,29 @@ const GambaranUmum = () => {
               Mewajibkan konservasi energi bagi semua pihak (pemerintah, penyedia, dan pengguna energi) melalui pengendalian produksi dan konsumsi, efisiensi, dan teknologi rendah karbon. Penggunaan energi final wajib memenuhi standar efisiensi dan mendukung target penurunan emisi. Pemerintah mendorong penerapan melalui kampanye, insentif, standardisasi, sertifikasi, dan audit energi.
             </p>
           </div>
+              
+          <div>
+            <h4 className="font-bold text-blue-700 mb-2">Bab VI: Kebijakan Pendukung Utama (Pasal 41-85)</h4>
+            <p className="text-gray-700 text-sm mb-2">
+              Mengatur **Dekarbonisasi Sektor Energi** (Pasal 41-44) melalui transisi energi, target dekarbonisasi, dan pembangunan sarana/prasarana. Mendorong **Energi Hijau dan Ekonomi Sirkular** (Pasal 50-52). Merinci pengembangan **Sumber Energi Baru** (termasuk hidrogen, amonia, dan nuklir - Pasal 53-55) dan mewajibkan penggunaan **teknologi rendah karbon** untuk Sumber Energi Tak Terbarukan (Pasal 58). Mengatur Pendanaan Sektor Energi (Pasal 63-64), penetapan **Harga Energi** berkeadilan (Pasal 65), pemberian **Insentif dan Subsidi** (Pasal 67-70), serta penguatan **Litbangjirap** (Pasal 71-73). Kewajiban penerapan **TKDN** (Pasal 82) dan penetapan/penanggulangan **Krisis/Darurat Energi** (Pasal 85).
+            </p>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-blue-700 mb-2">Bab VII: RUEN dan RUED (Pasal 86-88)</h4>
+            <p className="text-gray-700 text-sm mb-2">
+              Mewajibkan penyusunan **Rencana Umum Energi Nasional (RUEN)** oleh Pemerintah Pusat (periode 10 tahun, ditinjau 5 tahun) yang memuat strategi dekarbonisasi dan kebutuhan energi per 7 region. **Rencana Umum Energi Daerah (RUED)** disusun oleh Pemerintah Provinsi mengacu pada RUEN.
+            </p>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-blue-700 mb-2">Bab VIII: Pembinaan dan Pengawasan & Ketentuan Penutup (Pasal 89-93)</h4>
+            <p className="text-gray-700 text-sm mb-2">
+              **Dewan Energi Nasional (DEN)** bertugas melakukan pembinaan dan pengawasan kebijakan energi lintas sektoral (Pasal 89). Pemerintah Pusat/Daerah melakukan pembinaan dan pengawasan pengusahaan energi (Pasal 90). PP ini **mencabut dan menyatakan tidak berlaku** Perpres No. 79 Tahun 2014, sementara peraturan pelaksanaannya tetap berlaku sepanjang tidak bertentangan (Pasal 91-92).
+            </p>
+          </div>
+
+              
         </div>
       </div>
 
