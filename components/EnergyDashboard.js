@@ -1,9 +1,326 @@
 import React, { useState, useMemo } from 'react';
 import { LineChart, Line, Area, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Menu, X, ChevronDown, Filter } from 'lucide-react';
+const GambaranUmum = () => {
+  return (
+    <div className="prose max-w-none">
+      {/* Hero Section */}
+      <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 rounded-lg mb-8 border-l-4 border-blue-600">
+        <h2 className="text-3xl font-bold text-gray-800 mt-0 mb-4">
+          Memahami Arah Kebijakan Energi Indonesia: PP No. 40 Tahun 2025 tentang Kebijakan Energi Nasional
+        </h2>
+        <p className="text-lg text-gray-700 leading-relaxed">
+          Peraturan Pemerintah Nomor 40 Tahun 2025 tentang Kebijakan Energi Nasional (KEN) merupakan dokumen strategis yang menetapkan arah pengelolaan energi nasional hingga tahun 2060. PP ini ditandatangani oleh Presiden Republik Indonesia pada tanggal 15 September 2025 di Jakarta, sebagai landasan hukum dalam mewujudkan ketahanan energi, kemandirian energi, dan dekarbonisasi sektor energi menuju Net Zero Emission (NZE) tahun 2060.
+        </p>
+      </div>
 
+      {/* 5W+1H Framework */}
+      <div className="grid md:grid-cols-2 gap-6 mb-8">
+        {/* WHAT */}
+        <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-500">
+          <h3 className="text-xl font-bold text-green-700 mt-0 mb-3 flex items-center">
+            <span className="bg-green-100 px-3 py-1 rounded-full mr-3">APA</span>
+            Substansi Kebijakan
+          </h3>
+          <p className="text-gray-700 mb-3">
+            PP No. 40/2025 mengatur tentang pengelolaan energi nasional yang mencakup penyediaan, pemanfaatan, pengusahaan, cadangan energi, dan konservasi energi. Kebijakan ini menetapkan sasaran konkret untuk:
+          </p>
+          <ul className="text-gray-700 space-y-2">
+            <li>• Bauran Energi Baru dan Terbarukan (EBT) mencapai 19-23% pada 2030, dan 70-72% pada 2060</li>
+            <li>• Penurunan emisi GRK sektor energi dengan puncak emisi pada 2035 dan mencapai NZE (129 MtCO₂e) pada 2060</li>
+            <li>• Peningkatan konsumsi energi final per kapita dan elektrifikasi secara bertahap</li>
+            <li>• Pengurangan ketergantungan terhadap energi fosil dengan target spesifik untuk minyak bumi dan batubara</li>
+          </ul>
+        </div>
+
+        {/* WHY */}
+        <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-500">
+          <h3 className="text-xl font-bold text-blue-700 mt-0 mb-3 flex items-center">
+            <span className="bg-blue-100 px-3 py-1 rounded-full mr-3">MENGAPA</span>
+            Urgensi Kebijakan
+          </h3>
+          <p className="text-gray-700 mb-3">
+            Kebijakan Energi Nasional ini disusun untuk menjawab tantangan strategis Indonesia, yaitu:
+          </p>
+          <ul className="text-gray-700 space-y-2">
+            <li>• <strong>Ketahanan Energi:</strong> Memastikan ketersediaan energi yang andal untuk mendukung pembangunan ekonomi nasional</li>
+            <li>• <strong>Komitmen Iklim Global:</strong> Memenuhi komitmen Indonesia dalam Persetujuan Paris untuk menurunkan emisi gas rumah kaca</li>
+            <li>• <strong>Transisi Energi:</strong> Mengalihkan ketergantungan dari energi fosil menuju energi bersih secara terencana dan berkelanjutan</li>
+            <li>• <strong>Kemandirian Energi:</strong> Mengurangi ketergantungan impor dan mengoptimalkan potensi energi dalam negeri</li>
+          </ul>
+        </div>
+
+        {/* WHO */}
+        <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-purple-500">
+          <h3 className="text-xl font-bold text-purple-700 mt-0 mb-3 flex items-center">
+            <span className="bg-purple-100 px-3 py-1 rounded-full mr-3">SIAPA</span>
+            Pemangku Kepentingan
+          </h3>
+          <p className="text-gray-700 mb-3">
+            Implementasi KEN melibatkan berbagai pihak dengan peran masing-masing:
+          </p>
+          <ul className="text-gray-700 space-y-2">
+            <li>• <strong>Pemerintah Pusat:</strong> Perumus kebijakan, koordinator pelaksanaan, dan pengawas implementasi KEN</li>
+            <li>• <strong>Pemerintah Daerah:</strong> Pelaksana kebijakan di tingkat regional, penyusun rencana energi daerah yang selaras dengan KEN</li>
+            <li>• <strong>BUMN/BUMD:</strong> Pelaksana utama pengusahaan energi dan penyedia infrastruktur energi</li>
+            <li>• <strong>Sektor Swasta:</strong> Investor dan operator dalam pengembangan proyek energi, khususnya EBT</li>
+            <li>• <strong>Masyarakat:</strong> Konsumen energi yang didorong untuk berpartisipasi dalam konservasi dan efisiensi energi</li>
+          </ul>
+        </div>
+
+        {/* WHEN */}
+        <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-orange-500">
+          <h3 className="text-xl font-bold text-orange-700 mt-0 mb-3 flex items-center">
+            <span className="bg-orange-100 px-3 py-1 rounded-full mr-3">KAPAN</span>
+            Kerangka Waktu
+          </h3>
+          <p className="text-gray-700 mb-3">
+            KEN menetapkan periode pelaksanaan jangka panjang dengan milestone kunci:
+          </p>
+          <ul className="text-gray-700 space-y-2">
+            <li>• <strong>2025:</strong> PP No. 40/2025 ditandatangani dan mulai berlaku sebagai pedoman kebijakan energi nasional</li>
+            <li>• <strong>2030:</strong> Target awal bauran EBT 19-23% dan emisi GRK 1.017-1.184 MtCO₂e</li>
+            <li>• <strong>2035:</strong> Puncak emisi GRK sektor energi (peaking emissions)</li>
+            <li>• <strong>2040-2050:</strong> Fase akselerasi transisi energi dengan peningkatan bauran EBT hingga 53-55%</li>
+            <li>• <strong>2060:</strong> Target akhir NZE dengan emisi 129 MtCO₂e dan bauran EBT 70-72%</li>
+            <li>• <strong>Evaluasi Berkala:</strong> KEN dapat ditinjau ulang setiap 5 tahun atau lebih cepat jika terdapat perubahan kondisi strategis</li>
+          </ul>
+        </div>
+
+        {/* WHERE */}
+        <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-red-500">
+          <h3 className="text-xl font-bold text-red-700 mt-0 mb-3 flex items-center">
+            <span className="bg-red-100 px-3 py-1 rounded-full mr-3">DI MANA</span>
+            Cakupan Wilayah
+          </h3>
+          <p className="text-gray-700 mb-3">
+            Kebijakan ini berlaku untuk seluruh wilayah Negara Kesatuan Republik Indonesia dengan pendekatan:
+          </p>
+          <ul className="text-gray-700 space-y-2">
+            <li>• <strong>Nasional:</strong> Menetapkan target dan arah kebijakan energi untuk Indonesia secara keseluruhan</li>
+            <li>• <strong>Regional:</strong> Mendorong interkoneksi sistem energi antar daerah dan pulau untuk efisiensi dan keandalan</li>
+            <li>• <strong>Lokal:</strong> Mengutamakan pemanfaatan sumber energi setempat dan pemerataan akses energi</li>
+            <li>• <strong>Kawasan Perbatasan:</strong> Kerja sama pengembangan energi dengan negara tetangga untuk ketahanan energi kawasan</li>
+            <li>• <strong>Lintas Negara:</strong> Membuka kemungkinan ekspor-impor energi termasuk listrik untuk keamanan pasokan jangka panjang</li>
+          </ul>
+        </div>
+
+        {/* HOW */}
+        <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-teal-500">
+          <h3 className="text-xl font-bold text-teal-700 mt-0 mb-3 flex items-center">
+            <span className="bg-teal-100 px-3 py-1 rounded-full mr-3">BAGAIMANA</span>
+            Strategi Pelaksanaan
+          </h3>
+          <p className="text-gray-700 mb-3">
+            Pencapaian target KEN dilaksanakan melalui strategi komprehensif:
+          </p>
+          <ul className="text-gray-700 space-y-2">
+            <li>• <strong>Transisi Bertahap:</strong> Pengembangan energi rendah karbon secara rasional, terukur, dan berkelanjutan</li>
+            <li>• <strong>Prioritas EBT:</strong> Memaksimalkan pemanfaatan energi terbarukan dan meminimalkan energi fosil</li>
+            <li>• <strong>Teknologi Rendah Karbon:</strong> Penerapan CCUS, carbon capture, dan teknologi efisiensi energi</li>
+            <li>• <strong>Konservasi Energi:</strong> Wajib dilaksanakan oleh semua pemangku kepentingan dengan standar efisiensi energi</li>
+            <li>• <strong>Cadangan Energi:</strong> Penyediaan cadangan strategis, cadangan penyangga, dan cadangan operasional</li>
+            <li>• <strong>Instrumen Ekonomi:</strong> Insentif, pajak karbon, dan pembayaran berbasis kinerja penurunan emisi</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Key Highlights for Local Government */}
+      <div className="bg-gradient-to-r from-amber-50 to-amber-100 p-8 rounded-lg mb-8 border-l-4 border-amber-600">
+        <h3 className="text-2xl font-bold text-gray-800 mt-0 mb-4">
+          Pentingnya Dashboard KEN bagi Pemerintah Daerah
+        </h3>
+        <p className="text-gray-700 mb-4">
+          Dashboard ini dirancang khusus untuk mendukung Pemerintah Daerah dalam mengimplementasikan Kebijakan Energi Nasional di tingkat regional. Berikut adalah manfaat strategis yang dapat diperoleh:
+        </p>
+        
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <h4 className="font-bold text-amber-700 mb-2">1. Acuan Perencanaan Energi Daerah</h4>
+            <p className="text-sm text-gray-700">
+              Dashboard menyediakan visualisasi target nasional yang menjadi rujukan dalam menyusun Rencana Umum Energi Daerah (RUED) dan Rencana Pembangunan Jangka Menengah Daerah (RPJMD) sesuai amanat Pasal 4 PP No. 40/2025.
+            </p>
+          </div>
+          
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <h4 className="font-bold text-amber-700 mb-2">2. Monitoring dan Evaluasi Kinerja</h4>
+            <p className="text-sm text-gray-700">
+              Memudahkan pemantauan capaian target energi daerah terhadap target nasional secara berkala, mendukung fungsi pembinaan dan pengawasan sebagaimana Pasal 36 PP No. 40/2025.
+            </p>
+          </div>
+          
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <h4 className="font-bold text-amber-700 mb-2">3. Pendukung Pengambilan Keputusan</h4>
+            <p className="text-sm text-gray-700">
+              Menyajikan data komparatif antar periode dan sektor untuk membantu Kepala Daerah dan SKPD terkait dalam merumuskan kebijakan energi daerah yang tepat sasaran dan berbasis data.
+            </p>
+          </div>
+          
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <h4 className="font-bold text-amber-700 mb-2">4. Transparansi dan Akuntabilitas Publik</h4>
+            <p className="text-sm text-gray-700">
+              Mewujudkan prinsip transparansi dalam pengusahaan energi (Pasal 32) dengan menyediakan informasi yang mudah diakses oleh seluruh pemangku kepentingan dan masyarakat.
+            </p>
+          </div>
+          
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <h4 className="font-bold text-amber-700 mb-2">5. Identifikasi Peluang Investasi</h4>
+            <p className="text-sm text-gray-700">
+              Membantu mengidentifikasi sektor dan jenis energi yang memerlukan pengembangan prioritas, mendukung upaya menarik investasi EBT dan infrastruktur energi di daerah.
+            </p>
+          </div>
+          
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <h4 className="font-bold text-amber-700 mb-2">6. Koordinasi Lintas Sektor</h4>
+            <p className="text-sm text-gray-700">
+              Menyediakan basis data bersama untuk koordinasi antara Dinas Energi, Bappeda, Dinas Lingkungan Hidup, dan SKPD lainnya dalam implementasi program energi terintegrasi.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* What You Can Find */}
+      <div className="bg-white p-8 rounded-lg shadow-md mb-8">
+        <h3 className="text-2xl font-bold text-gray-800 mt-0 mb-4">
+          Apa yang Dapat Anda Temukan dalam Dashboard Ini?
+        </h3>
+        <p className="text-gray-700 mb-4">
+          Dashboard ini mentransformasikan data dan target yang termuat dalam PP No. 40/2025 menjadi visualisasi interaktif yang mudah dipahami, meliputi:
+        </p>
+        
+        <div className="space-y-4">
+          <div className="flex items-start">
+            <div className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full mr-4 flex-shrink-0">1</div>
+            <div>
+              <h4 className="font-bold text-gray-800 mb-1">Pemanfaatan Energi Final</h4>
+              <p className="text-gray-700 text-sm">Target konsumsi energi final per sektor (industri, transportasi, komersial, rumah tangga) dan per jenis energi (minyak, gas, batubara, listrik, EBT) dalam juta TOE untuk periode 2030-2060.</p>
+            </div>
+          </div>
+          
+          <div className="flex items-start">
+            <div className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full mr-4 flex-shrink-0">2</div>
+            <div>
+              <h4 className="font-bold text-gray-800 mb-1">Penyediaan Energi Primer</h4>
+              <p className="text-gray-700 text-sm">Proyeksi kebutuhan energi primer nasional dan target intensitas energi primer, mencerminkan efisiensi penggunaan energi terhadap pertumbuhan ekonomi.</p>
+            </div>
+          </div>
+          
+          <div className="flex items-start">
+            <div className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full mr-4 flex-shrink-0">3</div>
+            <div>
+              <h4 className="font-bold text-gray-800 mb-1">Energi per Kapita</h4>
+              <p className="text-gray-700 text-sm">Indikator kesejahteraan energi melalui konsumsi energi final per kapita dan penyediaan energi primer per kapita dalam satuan TOE dan GJ.</p>
+            </div>
+          </div>
+          
+          <div className="flex items-start">
+            <div className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full mr-4 flex-shrink-0">4</div>
+            <div>
+              <h4 className="font-bold text-gray-800 mb-1">Bauran Energi Baru dan Terbarukan (EBT)</h4>
+              <p className="text-gray-700 text-sm">Komposisi dan target kontribusi masing-masing sumber EBT (hidro, surya, angin, biomassa, panas bumi, biogas, nuklir) dalam bauran energi nasional.</p>
+            </div>
+          </div>
+          
+          <div className="flex items-start">
+            <div className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full mr-4 flex-shrink-0">5</div>
+            <div>
+              <h4 className="font-bold text-gray-800 mb-1">Penurunan Emisi Gas Rumah Kaca (GRK)</h4>
+              <p className="text-gray-700 text-sm">Lintasan penurunan emisi sektor energi, target pengurangan energi fosil, emisi per kapita, dan intensitas emisi energi primer menuju NZE 2060.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Key Features */}
+      <div className="bg-gradient-to-r from-green-50 to-green-100 p-8 rounded-lg mb-8 border-l-4 border-green-600">
+        <h3 className="text-2xl font-bold text-gray-800 mt-0 mb-4">
+          Fitur Utama Dashboard
+        </h3>
+        <div className="grid md:grid-cols-3 gap-4">
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <h4 className="font-bold text-green-700 mb-2">📊 Visualisasi Interaktif</h4>
+            <p className="text-sm text-gray-700">
+              Grafik dinamis dengan rentang proyeksi (minimum, rata-rata, maksimum) untuk memahami ketidakpastian dan skenario perencanaan.
+            </p>
+          </div>
+          
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <h4 className="font-bold text-green-700 mb-2">🔍 Perbandingan Multi-Dimensi</h4>
+            <p className="text-sm text-gray-700">
+              Bandingkan target antar periode waktu (2030 vs 2060), antar sektor, atau antar jenis energi untuk analisis mendalam.
+            </p>
+          </div>
+          
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <h4 className="font-bold text-green-700 mb-2">⚙️ Kontrol Tampilan Fleksibel</h4>
+            <p className="text-sm text-gray-700">
+              Filter dan toggle untuk menyesuaikan tampilan data sesuai kebutuhan analisis spesifik Anda.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Key Articles Summary */}
+      <div className="bg-white p-8 rounded-lg shadow-md mb-8">
+        <h3 className="text-2xl font-bold text-gray-800 mt-0 mb-4">
+          Ringkasan Pasal-Pasal Penting PP No. 40/2025
+        </h3>
+        
+        <div className="space-y-6">
+          <div>
+            <h4 className="font-bold text-blue-700 mb-2">Bab I: Ketentuan Umum (Pasal 1-5)</h4>
+            <p className="text-gray-700 text-sm mb-2">
+              Mendefinisikan terminologi kunci (energi, EBT, NZE, konservasi, intensitas energi, dll.) dan menetapkan tujuan KEN untuk memberi arah pengelolaan energi yang berkeadilan, berkelanjutan, efisien, dan berwawasan lingkungan. KEN berlaku hingga 2060 dan dapat ditinjau ulang setiap 5 tahun.
+            </p>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-blue-700 mb-2">Bab II: Tujuan dan Sasaran (Pasal 6-13)</h4>
+            <p className="text-gray-700 text-sm mb-2">
+              Menetapkan sasaran utama: ketahanan energi, dekarbonisasi menuju NZE 2060, peningkatan nilai tambah dalam negeri, dan penyerapan tenaga kerja. Pasal 11-13 merinci target spesifik untuk konsumsi energi per kapita, bauran EBT (19-23% di 2030, 70-72% di 2060), dan pengurangan emisi GRK (puncak emisi 2035, NZE 129 MtCO₂e di 2060).
+            </p>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-blue-700 mb-2">Bab III: Kebijakan (Pasal 14-30)</h4>
+            <p className="text-gray-700 text-sm mb-2">
+              Menguraikan strategi ketersediaan energi (Pasal 15), prioritas pemanfaatan EBT (Pasal 16-17), sistem cadangan energi tiga lapis (strategis, penyangga, operasional - Pasal 18-21), interkoneksi sistem listrik (Pasal 22-23), dan kebijakan ekspor-impor energi (Pasal 25-29). Penerimaan negara dari sektor energi dapat dimanfaatkan untuk mendukung ketahanan energi dan pengembangan EBT (Pasal 30).
+            </p>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-blue-700 mb-2">Bab IV: Pengusahaan Energi (Pasal 31-36)</h4>
+            <p className="text-gray-700 text-sm mb-2">
+              Mengatur mekanisme pengusahaan energi dari hulu hingga hilir dengan prinsip efisiensi, transparansi, persaingan sehat, dan perlindungan lingkungan. Wajib menggunakan teknologi efisien dan rendah karbon, serta memprioritaskan produk dan tenaga kerja dalam negeri. Pemerintah pusat dan daerah berperan dalam pembinaan, pengawasan, dan pemberian insentif.
+            </p>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-blue-700 mb-2">Bab V: Konservasi Energi (Pasal 37-40)</h4>
+            <p className="text-gray-700 text-sm mb-2">
+              Mewajibkan konservasi energi bagi semua pihak (pemerintah, penyedia, dan pengguna energi) melalui pengendalian produksi dan konsumsi, efisiensi, dan teknologi rendah karbon. Penggunaan energi final wajib memenuhi standar efisiensi dan mendukung target penurunan emisi. Pemerintah mendorong penerapan melalui kampanye, insentif, standardisasi, sertifikasi, dan audit energi.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Call to Action */}
+      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-8 rounded-lg shadow-lg text-center">
+        <h3 className="text-2xl font-bold mt-0 mb-4">
+          Mari Eksplorasi Target Energi Nasional
+        </h3>
+        <p className="text-lg mb-6 leading-relaxed">
+          Gunakan menu navigasi untuk menjelajahi visualisasi data target KEN dan memahami prioritas kebijakan energi Indonesia di masa depan. Dashboard ini dirancang untuk mendukung perencanaan, monitoring, dan pengambilan keputusan berbasis data di tingkat daerah.
+        </p>
+        <p className="text-sm opacity-90">
+          Dashboard ini merupakan interpretasi visual dari PP No. 40/2025 dan tidak menggantikan rujukan hukum resmi. Untuk keperluan legal dan formal, silakan merujuk pada naskah resmi Peraturan Pemerintah.
+        </p>
+      </div>
+    </div>
+  );
+};
 const EnergyDashboard = () => {
-  const [activeMenu, setActiveMenu] = useState('final-energy-sector');
+  const [activeMenu, setActiveMenu] = useState('gambaran-umum');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedCharts, setSelectedCharts] = useState({});
 
@@ -538,6 +855,7 @@ const EnergyDashboard = () => {
   }, []);
 
   const menuItems = [
+   { id: 'gambaran-umum', name: 'Gambaran Umum', hasSubmenu: false },
     {
       id: 'final-energy',
       name: 'Pemanfaatan Energi Final',
@@ -727,66 +1045,69 @@ return (
         )}
       </div>
 
-      {/* Main Content */}
-      <div className="flex-1 p-6 overflow-auto">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            {currentConfig?.title}
-          </h1>
-          
-          {/* Chart toggles */}
-          <div className="bg-white p-4 rounded-lg shadow-sm mb-4">
-            <div className="flex items-center gap-2 mb-3">
-              <Filter size={20} />
-              <span className="font-medium">Chart Visibility</span>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {currentConfig?.charts.map((chart) => (
-                <button
-                  key={chart.id}
-                  onClick={() => toggleChartVisibility(chart.id)}
-                  className={`px-3 py-1 rounded-full text-sm transition-colors ${
-                    currentSelected[chart.id]
-                      ? 'text-white'
-                      : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
-                  }`}
-                  style={{
-                    backgroundColor: currentSelected[chart.id] ? chart.color : undefined
-                  }}
-                >
-                  {chart.name}
-                </button>
-              ))}
-            </div>
+{/* Main Content */}
+<div className="flex-1 p-6 overflow-auto">
+  {activeMenu === 'gambaran-umum' ? (
+    <GambaranUmum />
+  ) : (
+    <>
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-gray-800 mb-2">
+          {currentConfig?.title}
+        </h1>
+        
+        {/* Chart toggles */}
+        <div className="bg-white p-4 rounded-lg shadow-sm mb-4">
+          <div className="flex items-center gap-2 mb-3">
+            <Filter size={20} />
+            <span className="font-medium">Chart Visibility</span>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {currentConfig?.charts.map((chart) => (
+              <button
+                key={chart.id}
+                onClick={() => toggleChartVisibility(chart.id)}
+                className={`px-3 py-1 rounded-full text-sm transition-colors ${
+                  currentSelected[chart.id]
+                    ? 'text-white'
+                    : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                }`}
+                style={{
+                  backgroundColor: currentSelected[chart.id] ? chart.color : undefined
+                }}
+              >
+                {chart.name}
+              </button>
+            ))}
           </div>
         </div>
+      </div>
 
-        {/* Chart */}
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <ResponsiveContainer width="100%" height={500}>
-            <ComposedChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis 
-                dataKey="year" 
-                type="number" 
-                scale="linear" 
-                domain={['dataMin', 'dataMax']}
-              />
-              <YAxis />
-              <Tooltip content={<CustomTooltip />} />
-              <Legend />
+      {/* Chart */}
+      <div className="bg-white rounded-lg shadow-sm p-6">
+        <ResponsiveContainer width="100%" height={500}>
+          <ComposedChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis 
+              dataKey="year" 
+              type="number" 
+              scale="linear" 
+              domain={['dataMin', 'dataMax']}
+            />
+            <YAxis />
+            <Tooltip content={<CustomTooltip />} />
+            <Legend />
+            
+            {currentConfig?.charts.map((chart) => {
+              if (!currentSelected[chart.id]) return null;
               
-              {/* First render all uncertainty areas (behind lines) */}
-              {currentConfig?.charts.map((chart) => {
-                if (!currentSelected[chart.id]) return null;
-                
-                const colors = generateColors(chart.color);
-                
-                return (
-                  <Area
-                    key={`area-${chart.id}`}
-                    type="monotone"
-                    dataKey={`${chart.id}_max`}
+              const colors = generateColors(chart.color);
+              
+              return (
+                <Area
+                  key={`area-${chart.id}`}
+                  type="monotone"
+                  dataKey={`${chart.id}_max`}
                     stroke="none"
                     fill={colors.areaFill}
                     fillOpacity={1}
@@ -795,56 +1116,55 @@ return (
               })}
               
               {/* Then render all mean lines (in front of areas) */}
-              {currentConfig?.charts.map((chart) => {
-                if (!currentSelected[chart.id]) return null;
-                
-                const colors = generateColors(chart.color);
-                
-                return (
-                  <Line
-                    key={`line-${chart.id}`}
-                    type="monotone"
-                    dataKey={`${chart.id}_mean`}
-                    stroke={colors.line}
-                    strokeWidth={3}
-                    dot={{ fill: colors.line, strokeWidth: 2, r: 5 }}
-                    name={chart.name}
-                  />
-                );
-              })}
-            </ComposedChart>
-          </ResponsiveContainer>
-        </div>
+        {currentConfig?.charts.map((chart) => {
+          if (!currentSelected[chart.id]) return null;
+          
+          const colors = generateColors(chart.color);
+          
+          return (
+            <Line
+              key={`line-${chart.id}`}
+              type="monotone"
+              dataKey={`${chart.id}_mean`}
+              stroke={colors.line}
+              strokeWidth={3}
+              dot={{ fill: colors.line, strokeWidth: 2, r: 5 }}
+              name={chart.name}
+            />
+          );
+        })}
+      </ComposedChart>
+    </ResponsiveContainer>
+  </div>
 
-        {/* Enhanced Legend */}
-        <div className="mt-4 bg-white rounded-lg shadow-sm p-4">
-          <h3 className="font-medium mb-3">Chart Legend</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <h4 className="text-sm font-medium text-gray-700 mb-2">Visual Elements</h4>
-              <div className="space-y-2 text-sm text-gray-600">
-                <div className="flex items-center gap-2">
-                  <div className="w-6 h-0.5 bg-gray-800"></div>
-                  <span>Mean projection (solid line)</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-6 h-3 bg-gray-400 opacity-30"></div>
-                  <span>Uncertainty range (transparent shaded area)</span>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h4 className="text-sm font-medium text-gray-700 mb-2">Interaction</h4>
-              <div className="text-sm text-gray-600">
-                <p>• Click chart toggles to show/hide individual series</p>
-                <p>• Hover over chart for detailed values</p>
-                <p>• All charts can be displayed simultaneously with transparent overlays</p>
-              </div>
-            </div>
+  {/* Enhanced Legend */}
+  <div className="mt-4 bg-white rounded-lg shadow-sm p-4">
+    <h3 className="font-medium mb-3">Chart Legend</h3>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <h4 className="text-sm font-medium text-gray-700 mb-2">Visual Elements</h4>
+        <div className="space-y-2 text-sm text-gray-600">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-0.5 bg-gray-800"></div>
+            <span>Mean projection (solid line)</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-3 bg-gray-400 opacity-30"></div>
+            <span>Uncertainty range (transparent shaded area)</span>
           </div>
         </div>
       </div>
+      <div>
+        <h4 className="text-sm font-medium text-gray-700 mb-2">Interaction</h4>
+        <div className="text-sm text-gray-600">
+          <p>• Click chart toggles to show/hide individual series</p>
+          <p>• Hover over chart for detailed values</p>
+          <p>• All charts can be displayed simultaneously with transparent overlays</p>
+        </div>
+      </div>
     </div>
+  </div>
+</>
     
     {/* Footer - Fixed Bottom */}
     <footer className="bg-gradient-to-r from-gray-700 to-gray-800 text-white py-3 px-6 shadow-lg">
