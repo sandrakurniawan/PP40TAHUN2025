@@ -822,7 +822,7 @@ const EnergyDashboard = () => {
           ]
         }
       ],
-      'gasrumahtangga': [
+      'gasrumahtanggamenu': [
         { 
           id: 'gasrumahtangga', 
           name: 'Sambungan Gas Rumah Tangga (unit)', 
@@ -835,7 +835,7 @@ const EnergyDashboard = () => {
           ]
         }
       ],
-      'listrikkapita': [
+      'listrikkapitamenu': [
         { 
           id: 'listrikkapita', 
           name: 'Energi Listrik per Kapita (dalam kWh)', 
@@ -966,8 +966,8 @@ const EnergyDashboard = () => {
       ]
     },
     { id: 'energy-per-capita', name: 'Energi per Kapita', hasSubmenu: false },
-    { id: 'listrikkapita', name: 'Energi Listrik per Kapita (dalam kWh)', hasSubmenu: false },
-    { id: 'gasrumahtangga', name: 'Sambungan Gas Rumah Tangga', hasSubmenu: false },
+    { id: 'listrikkapitamenu', name: 'Energi Listrik per Kapita (dalam kWh)', hasSubmenu: false },
+    { id: 'gasrumahtanggamenu', name: 'Sambungan Gas Rumah Tangga', hasSubmenu: false },
     {
     { 
       id: 'EBT', 
