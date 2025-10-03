@@ -925,7 +925,7 @@ const EnergyDashboard = () => {
     },
     'gasrumahtangga': {
       title: 'Sambungan Gas Rumah Tangga (unit)',
-      charts: staticData['gaserumahtangga']
+      charts: staticData['gasrumahtangga']
     },
     'ghg-energysector': {
       title: 'Emisi GRK Sektor Energi (CO2e)',
