@@ -968,6 +968,7 @@ const EnergyDashboard = () => {
     { id: 'energy-per-capita', name: 'Energi per Kapita', hasSubmenu: false },
     { id: 'listrikkapita', name: 'Energi listrik per Kapita', hasSubmenu: false },
     { id: 'gasrumahtangga', name: 'Sambungan Gas Rumah Tangga', hasSubmenu: false },
+    {
     { 
       id: 'EBT', 
       name: 'EBT', 
