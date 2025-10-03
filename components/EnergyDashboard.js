@@ -822,6 +822,32 @@ const EnergyDashboard = () => {
           ]
         }
       ],
+      'gasrumahtangga': [
+        { 
+          id: 'gasrumahtangga', 
+          name: 'Sambungan Gas Rumah Tangga', 
+          color: '#00798c',
+          data: [
+            { year: 2030, min: 1745000, mean: 1885000, max: 2025000 },
+            { year: 2040, min: 3045794, mean: 3538434, max: 4031074},
+            { year: 2050, min: 4345794, mean: 4988660.5, max: 5631527},
+            { year: 2060, min: 5645794, mean: 6607047.5, max: 7568301}
+          ]
+        }
+      ],
+      'listrikkapita': [
+        { 
+          id: 'listrikkapita', 
+          name: 'Energi listrik per Kapita', 
+          color: '#a6854b',
+          data: [
+            { year: 2030, min: 2346, mean: 2710.5, max: 3075 },
+            { year: 2040, min: 3328, mean: 4068.5, max: 4809},
+            { year: 2050, min: 4444, mean: 5219, max: 5994 },
+            { year: 2060, min: 5083, mean: 5804.5, max: 6526 }
+          ]
+        }
+      ],
       'ghg-energysector': [
         { 
           id: 'energysector', 
@@ -893,6 +919,14 @@ const EnergyDashboard = () => {
       title: 'Emisi GRK Sektor Energi (CO2e) per Kapita',
       charts: staticData['ghg-energysectorcapita']
     },
+      listrikkapita': {
+      title: 'Energi Listrik per Kapita (dalam kWh)',
+      charts: staticData['listrikkapita']
+    },
+    'gasrumahtangga': {
+      title: 'Sambungan Gas Rumah Tangga (unit)',
+      charts: staticData['listrikkapita']
+    },
     'ghg-energysector': {
       title: 'Emisi GRK Sektor Energi (CO2e)',
       charts: staticData['ghg-energysector']
@@ -932,6 +966,8 @@ const EnergyDashboard = () => {
       ]
     },
     { id: 'energy-per-capita', name: 'Energi per Kapita', hasSubmenu: false },
+    { id: 'listrikkapita', name: 'Energi listrik per Kapita', hasSubmenu: false },
+    { id: 'gasrumahtangga', name: 'Sambungan Gas Rumah Tangga', hasSubmenu: false },
     { 
       id: 'EBT', 
       name: 'EBT', 
@@ -944,7 +980,7 @@ const EnergyDashboard = () => {
     
     {
       id: 'ghg',
-      name: 'Greenhouse Gas (GHG) Reduction',
+      name: 'Pengurangan Gas Rumah Kaca (GRK)',
       hasSubmenu: true,
       submenu: [
         { id: 'ghg-fossil-reduction', name: 'Pengurangan Energi Fosil(dalam %)' },
