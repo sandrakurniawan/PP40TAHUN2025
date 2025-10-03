@@ -825,7 +825,7 @@ const EnergyDashboard = () => {
       'gasrumahtangga': [
         { 
           id: 'gasrumahtangga', 
-          name: 'Sambungan Gas Rumah Tangga', 
+          name: 'Sambungan Gas Rumah Tangga (unit)', 
           color: '#00798c',
           data: [
             { year: 2030, min: 1745000, mean: 1885000, max: 2025000 },
@@ -838,7 +838,7 @@ const EnergyDashboard = () => {
       'listrikkapita': [
         { 
           id: 'listrikkapita', 
-          name: 'Energi listrik per Kapita', 
+          name: 'Energi Listrik per Kapita (dalam kWh)', 
           color: '#a6854b',
           data: [
             { year: 2030, min: 2346, mean: 2710.5, max: 3075 },
@@ -925,7 +925,7 @@ const EnergyDashboard = () => {
     },
     'gasrumahtangga': {
       title: 'Sambungan Gas Rumah Tangga (unit)',
-      charts: staticData['listrikkapita']
+      charts: staticData['gaserumahtangga']
     },
     'ghg-energysector': {
       title: 'Emisi GRK Sektor Energi (CO2e)',
@@ -966,7 +966,7 @@ const EnergyDashboard = () => {
       ]
     },
     { id: 'energy-per-capita', name: 'Energi per Kapita', hasSubmenu: false },
-    { id: 'listrikkapita', name: 'Energi listrik per Kapita', hasSubmenu: false },
+    { id: 'listrikkapita', name: 'Energi Listrik per Kapita (dalam kWh)', hasSubmenu: false },
     { id: 'gasrumahtangga', name: 'Sambungan Gas Rumah Tangga', hasSubmenu: false },
     {
     { 
